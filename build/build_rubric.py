@@ -1,50 +1,54 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import cordell as c
-OUT = "/home/azureuser/geranium_tasks/task2_env/RUBRIC.md"
-o = c.option_costs(); enc = c.facility_pte_tpy(c.ENCLOSURE_CAPTURE)
-C = [
-("Rigid",5,f"Computes potential to emit on {c.PTE_DAYS_PER_YEAR} days, being 8,760 hours, and states that the plant's {c.CLIENT_STATED_DAYS} day schedule cannot be credited because Regulation 5.02(b) counts an operating limitation only where it is federally enforceable and no permit condition restricts hours. Using the stated schedule earns nothing."),
-("Rigid",4,f"Uses the coating volatile organic compound content less water and exempt compounds of {c.COATING['voc_less_water_lb_gal']:.2f} lb/gal rather than the as-supplied value of {c.COATING['voc_as_supplied_lb_gal']:.2f} lb/gal, consistent with permit condition 3.2. Using the as-supplied value earns nothing."),
-("Rigid",5,f"Calculates overall control as the product of capture and destruction, {c.RTO_CAPTURE_AS_DESIGNED:.0%} times {c.RTO_DESTRUCTION:.0%} giving about {c.overall_control(c.RTO_CAPTURE_AS_DESIGNED):.2%}, per Regulation 5.02(d). Crediting the destruction efficiency alone earns nothing."),
-("Rigid",4,f"Reports Line 4 potential to emit of about {c.line4_pte_tpy():.2f} tons per year, being the controlled coating stream plus the uncontrolled cleanup solvent. A figure that omits the cleanup solvent or applies control to it earns nothing."),
-("Rigid",4,f"Aggregates the August 2025 Line 2 debottleneck of {c.LINE2_DEBOTTLENECK['voc_tpy']:.2f} tons per year with this project under Regulation 5.03(b), notwithstanding that no permit was obtained for it. Treating Line 4 in isolation earns nothing."),
-("Rigid",3,f"Reports a project emissions increase of about {c.project_increase_tpy():.2f} tons per year and notes that this is below the {c.SIGNIFICANT_VOC_TPY:.0f} ton significance threshold. Omitting the comparison, or reporting an increase that excludes the Line 2 change, earns nothing."),
-("Rigid",5,f"Computes facility potential to emit after the project as about {c.facility_pte_tpy():.2f} tons per year against the {c.MAJOR_VOC_TPY:.0f} ton major source threshold, and concludes the facility becomes a major stationary source. Stopping at the significance test earns nothing."),
-("Rigid",5,"States that because the project makes a minor source major, Regulation 5.04(b) requires it to be reviewed as a new major stationary source, that the emissions of the entire project are subject to review, and that netting is not available. Concluding that no review is triggered because the increase is below the significance threshold earns nothing."),
-("Rigid",5,f"Excludes the {c.FUGITIVE_VOC_TPY:.2f} tons per year of fugitive emissions from the major source determination, because surface coating manufacture is not a listed category under Regulation 5.02(c), and notes that including them would push the recommended option back over the threshold. Including fugitives earns nothing."),
-("Rigid",4,f"Concludes that the {abs(c.LINE1_SHUTDOWN['voc_tpy']):.0f} ton 2022 Line 1 shutdown is not creditable, on the grounds that it was relied upon in full in revision R-23-0412 and that netting is unavailable where a project makes a minor source major. Applying the credit earns nothing."),
-("Rigid",3,f"Checks hazardous air pollutants and concludes the facility does not become major, with xylene at about {c.hap_after()['Xylene']:.2f} tons per year against the {c.HAP_SINGLE_TPY:.0f} ton single pollutant threshold and an aggregate below {c.HAP_AGGREGATE_TPY:.0f}. Omitting the hazardous air pollutant check earns nothing."),
-("Rigid",2,f"Treats the cleanup solvent as uncontrolled, at about {c.cleanup_voc_tpy():.2f} tons per year, because it is not ducted to the oxidiser under either capture arrangement. Applying control to it earns nothing."),
-("Rigid",5,f"Demonstrates that a permanent total enclosure raises overall control to about {c.overall_control(c.ENCLOSURE_CAPTURE):.0%} and brings facility potential to emit to roughly {enc:.2f} tons per year, below the major source threshold at full design throughput. An option analysis that does not compute the resulting facility total earns nothing."),
-("Rigid",3,f"Quantifies the throughput cap alternative at roughly {c.capped_throughput_gal_day():.0f} gallons per day, about {c.capped_throughput_gal_day()/c.L4_DESIGN_GAL_DAY:.0%} of the design rate, and identifies that the limit must be federally enforceable to count. Presenting a cap without the resulting throughput earns nothing."),
-("Rigid",3,f"Prices the major source route at about ${o['major']:,.0f}, including offsets of {o['offset_tons']:.2f} tons at the {c.OFFSET_RATIO:.2f} to one ratio costing about ${o['offsets']:,.0f}. Omitting offsets, or applying them without the ratio, earns nothing."),
-("Rigid",3,f"Prices the enclosure route at about ${o['enclosure']:,.0f} and quantifies the difference against the major source route at roughly ${o['saving']:,.0f}. Comparing the options without a cost difference earns nothing."),
-("Rigid",3,f"States the permitting duration for each route, {c.SCHEDULE_MONTHS['major source review'][0]} to {c.SCHEDULE_MONTHS['major source review'][1]} months for major source review against {c.SCHEDULE_MONTHS['minor revision'][0]} to {c.SCHEDULE_MONTHS['minor revision'][1]} for a minor revision, and relates it to the client's second quarter start. Omitting the schedule earns nothing."),
-("Subjective",5,"Recommends the permanent total enclosure and supports it on both the threshold arithmetic and the permitting schedule, rather than on capital cost alone. Any recommendation that keeps the facility below the major source threshold at full throughput and is justified against cost and schedule together earns full credit; a recommendation with no supporting comparison earns nothing."),
-("Subjective",4,"Corrects the client's stated premise that the project is acceptable because the increase is below forty tons per year, explaining that the significance threshold applies only at a source that is already major. Any explanation that distinguishes the modification test from the new major source test earns full credit."),
-("Subjective",3,"Identifies the unpermitted August 2025 Line 2 change as a compliance matter in its own right, contrary to permit condition 7.2, and reaches a position on how it should be resolved. Either recommending it be regularised within this application or addressed separately earns full credit where the reasoning is given."),
-("Subjective",2,f"Notes that the margin to the threshold under the recommended option is only a few tons per year and draws a consequence from it, such as verification of the enclosure or caution about future changes. Any handling that quantifies the headroom and states why it matters earns full credit."),
-("Format",2,"Delivers a single file named Cordell_NSR_Analysis.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
-("Format",2,"Builds the workbook on live formulas resolving back to the design data and the regulation thresholds, so the determination re-computes if a coating property or a control efficiency changes. A workbook of hard-coded results earns nothing."),
-("Format",1,"Leads with a sheet carrying the applicability determination, the recommended route and its cost, so the answer is readable without working through the calculation sheets. Burying the determination among the calculations earns nothing."),
-("Negative",-5,f"Concludes that major source review is not triggered because the project increase of about {c.project_increase_tpy():.0f} tons per year is below the significance threshold. Apply once wherever that conclusion is stated."),
-("Negative",-5,f"Calculates potential to emit on the plant's {c.CLIENT_STATED_DAYS} day operating schedule rather than on 8,760 hours. Apply once wherever the restricted schedule is used."),
-("Negative",-4,"Includes fugitive emissions in the major stationary source determination, when surface coating manufacture is not a listed category. Apply once."),
-("Negative",-4,"Applies the 2022 Line 1 shutdown as a netting credit against this project. Apply once."),
-("Negative",-4,"Credits the oxidiser destruction efficiency without applying capture efficiency, or uses the as-supplied coating volatile organic compound content instead of the less water value. Apply once for either error."),
-("Negative",-3,"States a figure in one place that contradicts the same figure elsewhere in the workbook, for example a potential to emit, a cost total or a control efficiency that differs between the summary sheet and the calculation sheets. Apply once."),
+import tracker as t
+OUT="/home/azureuser/geranium_tasks/task2_env/RUBRIC.md"
+rows=t.build_sample(); med,cut=t.flag_quality(rows); cl=t.cleaned(rows)
+w0=t.rake(cl); w=t.trim_and_rerake(cl,w0); n=len(cl)
+sp=sum(1 for x in rows if x["_speeder"]); st=sum(1 for x in rows if x["_straight"])
+uw,ww=t.umean(cl,'aware'),t.wmean(cl,w,'aware')
+u35=sum(1 for x in cl if x["age_band"]=="18-34")/n; o65=sum(1 for x in cl if x["age_band"]=="65+")/n
+C=[
+("Rigid",4,f"Applies the speeder rule before weighting, using a threshold of one third of the wave median length of interview, which is about {cut:.2f} minutes against a median of {med:.1f}, and removes about {sp} respondents. Weighting an uncleaned file, or setting the threshold by any other rule, earns nothing."),
+("Rigid",4,f"Removes about {st} straightliners, defined as an identical response to all eight battery items, counts respondents failing both quality rules once rather than twice, and arrives at a cleaned base of about {n}. A base materially different from that earns nothing."),
+("Rigid",5,"Rakes to the three margins in the method note and to those only: age band by gender interlocked, region, and highest educational attainment. Adding a margin, or dropping one, earns nothing."),
+("Rigid",5,f"Does not use the syndicated category incidence figure of {t.CATEGORY_INCIDENCE_SYNDICATED:.0%} as a weighting margin, and states why: it is drawn from adults 21 and over on a three month recall window rather than this tracker's universe and twelve month definition, and category use is a measured outcome here rather than a demographic frame. Raking to it earns nothing."),
+("Rigid",3,"Treats age by gender as a single interlocked margin of eight cells rather than as two separate margins. Raking to age and gender independently earns nothing."),
+("Rigid",4,f"Trims the fitted weights at {t.TRIM_LOW:.2f} and {t.TRIM_HIGH:.2f} and repeats the fit after trimming, rather than trimming and stopping. About nine weights exceed the upper bound before trimming. Trimming without re-fitting, which leaves the margins no longer matching the benchmarks, earns nothing."),
+("Rigid",4,f"Reports an effective sample size of about {t.ess(w):.0f}, computed as the square of the sum of the weights over the sum of the squared weights. A figure materially different, or the achieved sample size reported as the effective one, earns nothing."),
+("Rigid",3,f"Reports a design effect of about {t.deff(w):.2f}, being the achieved sample size over the effective sample size. Omitting the design effect earns nothing."),
+("Rigid",5,f"Reports the margin of error on the effective sample size, giving about {t.moe(w)*100:.2f} percentage points at ninety five percent confidence near a fifty percent proportion, rather than about {1.96*(0.25/n)**0.5*100:.2f} points computed on the achieved sample. Reporting the achieved-base figure earns nothing."),
+("Rigid",3,f"Reports unweighted wave 12 awareness of about {uw*100:.1f} per cent, and identifies it as the figure that produced the client's query rather than as the result. Presenting it as the wave 12 result earns nothing."),
+("Rigid",5,f"Reports weighted wave 12 awareness of about {ww*100:.1f} per cent. A figure materially different from that, on the method note's scheme, earns nothing."),
+("Rigid",5,f"States that the apparent change against wave 11 is about {(uw-0.664)*100:+.1f} points unweighted while the change on the weighted basis is about {(ww-0.664)*100:+.1f} points, and presents the second as the comparable figure. Reporting only one of the two earns nothing."),
+("Rigid",4,f"Quantifies the composition problem, with respondents under 35 at about {u35*100:.0f} per cent of the cleaned sample against a benchmark of {sum(v for (a,g),v in t.AGE_GENDER.items() if a=='18-34')*100:.0f} per cent, and those 65 and over at about {o65*100:.0f} per cent against {sum(v for (a,g),v in t.AGE_GENDER.items() if a=='65+')*100:.0f} per cent. Asserting a skew without quantifying it earns nothing."),
+("Rigid",4,"Restricts the past twelve month use measure to respondents interviewed on days 3 to 9, because the screener on days 1 and 2 asked about a three month window and does not measure the same thing. Reporting that metric across all field days earns nothing."),
+("Rigid",2,"Demonstrates that the weighted sample reproduces each benchmark margin, with the weighted shares matching the population targets on all three margins. Omitting the margin check earns nothing."),
+("Rigid",2,"Reports the headline metrics on a base of all adults rather than on category users, consistent with the method note. Rebasing to category users earns nothing."),
+("Subjective",5,"Attributes the apparent decline to sample composition arising from the panel supplier substitution, and supports that with the age profile of the achieved sample rather than asserting it. Any explanation that connects the supplier change to the age skew and the age skew to awareness earns full credit; attributing the movement to a change in the market earns nothing."),
+("Subjective",4,"Concludes that the brand is flat within the margin of error rather than that it has declined, and expresses that against the corrected figure and the reported precision. Any conclusion that compares the weighted change to the margin of error earns full credit."),
+("Subjective",3,"Explains why the syndicated incidence figure was set aside, addressing both the mismatch in universe and recall window and its status as an outcome rather than a frame. Any explanation covering either ground earns full credit; setting it aside silently earns nothing."),
+("Subjective",3,"Draws out the precision cost of correcting a wave with two short cells, noting that the effective sample is materially below the achieved sample and that the wave is therefore less precise than usual. Any treatment that connects the shortfalls to the design effect earns full credit."),
+("Subjective",3,"Handles the screener change by stating the base used for the affected metric rather than dropping the metric or reporting it without qualification. Either restricting the base or suppressing the metric earns full credit where the reason is stated."),
+("Format",2,"Delivers a single file named Wave12_Weighted.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
+("Format",2,"Delivers the cleaned respondent file with a weight against every retained row, not summary tables alone, so the client's analyst can reproduce the estimates. Summary output without respondent-level weights earns nothing."),
+("Format",1,"Computes the reported estimates and diagnostics as formulas over the weight column rather than typing in results, so the figures recompute if a weight changes. Hard-coded summary figures earn nothing."),
+("Negative",-5,"Reports the unweighted awareness figure as the wave 12 result, or places it on the trend line alongside prior waves as a comparable value. Apply once."),
+("Negative",-5,"Uses the syndicated category incidence figure as a raking margin. Apply once."),
+("Negative",-4,"Reports the margin of error on the achieved sample size rather than the effective sample size, overstating the precision of the wave. Apply once."),
+("Negative",-3,"Trims the weights without repeating the fit afterwards, leaving the weighted margins no longer matching the population benchmarks. Apply once."),
+("Negative",-3,"Applies the quality removals after weighting rather than before, so the weights are fitted on respondents who are then discarded. Apply once."),
+("Negative",-3,"Reports past twelve month use across all field days without addressing the screener wording change on days 1 and 2. Apply once."),
 ]
-pos=sum(w for k,w,_ in C if w>0); neg=sum(w for k,w,_ in C if w<0)
-fn=sum(1 for k,w,_ in C if k=="Format"); fw=sum(w for k,w,_ in C if k=="Format")
-over=[(i,len(t)) for i,(_,_,t) in enumerate(C,1) if len(t)>500]
+pos=sum(x for k,x,_ in C if x>0); neg=sum(x for k,x,_ in C if x<0)
+fn=sum(1 for k,x,_ in C if k=="Format"); fw=sum(x for k,x,_ in C if k=="Format")
+over=[(i,len(s)) for i,(_,_,s) in enumerate(C,1) if len(s)>500]
 L=["# Rubric - form-ready criteria","",f"**{len(C)} criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.","",
    f"Maximum positive reward {pos}. Negative criteria total {neg}.","",
    f"- Format criteria: {fn} of {len(C)} ({fn/len(C):.0%}), under the half limit",
    f"- Format weight: {fw} of {pos} ({fw/pos:.1%}), under the quarter limit",
-   f"- Negative criteria: {sum(1 for k,w,_ in C if w<0)}, above the minimum of two",
-   f"- Longest criterion: {max(len(t) for _,_,t in C)} characters","","---",""]
-for i,(k,w,t) in enumerate(C,1):
-    L+=[f"### Criterion {i}  ·  weight `{w}`  ·  _{k}_","",t,"",f"<sub>{len(t)} / 500 characters</sub>",""]
+   f"- Negative criteria: {sum(1 for k,x,_ in C if x<0)}, above the minimum of two",
+   f"- Longest criterion: {max(len(s) for _,_,s in C)} characters","","---",""]
+for i,(k,x,s) in enumerate(C,1):
+    L+=[f"### Criterion {i}  ·  weight `{x}`  ·  _{k}_","",s,"",f"<sub>{len(s)} / 500 characters</sub>",""]
 open(OUT,"w").write("\n".join(L)+"\n")
-print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} ({fn/len(C):.0%}), {fw/pos:.1%} of reward | longest {max(len(t) for _,_,t in C)} | over 500: {over or 'none'}")
+print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} ({fn/len(C):.0%}), {fw/pos:.1%} | longest {max(len(s) for _,_,s in C)} | over 500: {over or 'none'}")
