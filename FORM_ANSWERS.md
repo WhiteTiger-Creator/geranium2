@@ -1,49 +1,47 @@
 # Submission form - field by field
 
-Task 2. Nothing here contains the project code name.
+Rebuilt task 2. Nothing here contains the project code name.
 
 ---
 
 ## Section 1
 
-### User Prompt  (2459 / 3000 characters)
+### User Prompt  (2232 / 3000 characters)
 
 ```
-I run the site assessment group at Marchbank Environmental, a 30-person environmental consulting firm in Brayton. Most of what we do is transaction support: Phase I and Phase II work for buyers who are already under contract and running out of clock.
+We are a twenty-person air quality and environmental engineering practice in Calvert and most of what I do is permitting for coatings, printing and metal finishing plants.
 
-Kestrel Industrial Partners is buying a 6.2-acre former metal finishing plant on Fairlead Street and intends to demolish the building and put up a distribution warehouse. We finished the Phase II field work in late February and the last of the laboratory data came in on Friday. Their due diligence period expires March 31, so they need our conclusions in time to decide whether to close, renegotiate or walk away. My assignment note is 01_PM_Assignment_Note.docx and it sets out what their acquisitions lead and their outside counsel each need from us.
+Cordell Specialty Coatings has board approval for a fourth topcoat line and the equipment order goes in at the end of June. Anselm Vieira runs the plant and his request is 01_Client_Request.docx. He has done his own arithmetic, satisfied himself the project is comfortably under the number that matters, and wants that confirmed before he commits capital. Read what he tells us closely, because two of the things he mentions in passing change the answer and he plainly does not think either of them is relevant.
 
-The analytical data are in 02_Soil_Analytical_Results.xlsx and 03_Groundwater_Analytical_Results.xlsx. Field records, the sample cross-references and the measured dimensions of each site feature are in 04_Field_Records_and_Site_Features.xlsx. Read 05_Laboratory_Case_Narrative.docx before you screen anything against anything, because Calderwood does not validate data and there are items in there that change what some of the results mean.
+The line design is in 02_Line4_Design_Data.xlsx and the coating and solvent properties are in 03_Coating_Data_Sheets.xlsx. Their current permit is 04_Existing_Permit.docx and the applicability provisions are in 05_Air_Regulation_5.docx. Work from that regulation rather than from what you remember of similar programmes elsewhere, because its definitions are what govern here and one of them is not what you would expect. Thurlow has put up two capture arrangements in 06_Control_Equipment.docx and has declined to recommend either, which is fair because it is a permitting question and not an equipment one. Current facility emissions are in 07_Facility_Emissions.xlsx, pricing is in 08_Cost_Estimates.xlsx, and the agency file is summarised in 09_Permit_History.docx.
 
-Screening levels and the agency's application notes are in 06_ODEQ_Screening_Levels.xlsx. Do not simply reach for the most conservative column. Which criteria apply here is a judgment you have to make and defend, and the facts that decide it are in 07_Phase_I_Findings_Summary.docx rather than in the screening table itself.
+What Anselm needs is whether the project triggers major source review, and if it does, what he can do about it, what each route costs and how many months it takes. Work the applicability logic in order and show it: potential to emit, what aggregates with this project, what nets against it if anything, and only then the threshold tests. Several of those steps have a defensible answer and a convenient one and they are not the same.
 
-Build the remedial cost from the unit rates in 08_Remedial_Cost_Basis.xlsx rather than from experience, and read 09_PSA_Environmental_Provisions.docx before you write the recommendation. Two clauses in there constrain what we are able to propose, and one of them our client cannot satisfy on its own.
-
-Give it back as a single memorandum named Fairlead_Phase_II_Evaluation_Memo.docx, written to the client over my signature. It needs to cover which constituents exceed which criteria and where, what the data will and will not support, what the remedy is and what it costs, how that cost sits against the escrow, and what is still unknown. Attach money to the recommendation and put a number of days against anything you say we still need to do. Marisa can follow a screening table but she will not read an appendix, and "a few weeks" is not an answer she can take into a negotiation.
+Give it back as one workbook named Cordell_NSR_Analysis.xlsx, built on live formulas off the design data and the regulation thresholds rather than typed-in results, and lead with a sheet carrying the determination, the recommended route and what it costs. He is an engineer and will follow a calculation, but he will act on the first sheet.
 ```
 
 ### O*NET Occupation
 
-`Environmental Scientists and Specialists, Including Health` - 19-2041.00
+`Environmental Engineers` - 17-2081.00
 
 ### O*NET Tasks (select these four, verbatim)
 
-- Collect, synthesize, analyze, manage, and report environmental data, such as pollution emission measurements, atmospheric monitoring measurements, meteorological or mineralogical information, or soil or water samples.
-- Analyze data to determine validity, quality, and scientific significance and to interpret correlations between human activities and environmental effects.
-- Review and implement environmental technical standards, guidelines, policies, and formal regulations that meet all appropriate requirements.
-- Communicate scientific or technical information to the public, organizations, or internal audiences through oral briefings, written documents, workshops, conferences, training sessions, or public hearings.
+- Provide technical support for environmental remediation or litigation projects, including remediation system design or determination of regulatory applicability.
+- Advise industries or government agencies about environmental policies and standards.
+- Obtain, update, or maintain plans, permits, or standard operating procedures.
+- Design, or supervise the design of, systems, processes, or equipment for control, management, or remediation of water, air, or soil quality.
 
 ### O*NET Skills (from Skills, not Technology Skills)
 
+- Mathematics
+- Critical Thinking
 - Reading Comprehension
 - Science
-- Critical Thinking
-- Mathematics
 - Writing
 
 ### Input File Uploader
 
-Upload `fairlead_input_files.zip` - 9 files, flat, no subfolders.
+Upload `cordell_input_files.zip` - 9 files, flat, no subfolders.
 
 ### How many input files are tied to your prompt?
 
@@ -51,11 +49,11 @@ Upload `fairlead_input_files.zip` - 9 files, flat, no subfolders.
 
 ### Are the input files multi-modal?
 
-**No.** All nine are .docx or .xlsx. No images, audio, video, PDF or PPTX.
+**No.** All nine are .docx or .xlsx.
 
 ### Is web search allowed in your prompt?
 
-**No.** Self-contained. Screening levels, background ranges, unit costs and contract terms are all supplied.
+**No.** Self-contained. The regulation, the permit, the emission data and the pricing are all supplied.
 
 ### Manual completion time
 
@@ -67,55 +65,52 @@ Upload `fairlead_input_files.zip` - 9 files, flat, no subfolders.
 
 ### Golden Solution File Uploader
 
-Upload `fairlead_golden_solution.zip` - one file, `Fairlead_Phase_II_Evaluation_Memo.docx`.
+Upload `cordell_golden_solution.zip` - one file, `Cordell_NSR_Analysis.xlsx`.
 
 ### What LLM did you use as a starting point?
 
 Answer honestly for your own workflow.
 
-### Rubric - 31 criteria
+### Rubric - 30 criteria
 
-Max positive reward **89**; negatives total **-25**. Format is 2 of 31 criteria (6%) and 3.4% of reward. 6 negative criteria. Longest 433 chars.
+Max positive **85**; negatives **-25**. Format 3 of 30 criteria (10%), 5.9% of reward. 6 negative criteria. Longest 381 chars.
 
 | # | Weight | Criterion |
 |---|---|---|
-| 1 | `4` | Applies the industrial and commercial soil direct contact criteria rather than the residential column, and grounds that on the M-2 zoning, the planned distribution warehouse use and the client's acceptance of an activity and use limitation. Applying residential criteria throughout, or switching columns without stating a basis, earns nothing. |
-| 2 | `3` | Applies the soil to groundwater criteria to every area irrespective of land use classification, and identifies the leaching pathway rather than direct contact as the driver of most of the remedial footprint. Screening soil against direct contact criteria only earns nothing. |
-| 3 | `5` | Excludes the GW-1 potable supply criteria and screens groundwater against GW-2, on the basis that the surficial aquifer is mapped Class II-B, the property is on municipal water and no private supply wells were found within one mile. Screening groundwater against GW-1 earns nothing. |
-| 4 | `4` | Converts the laboratory's soil volatile results from ug/kg to mg/kg before comparing them to the screening table, which publishes soil criteria in mg/kg. Comparing ug/kg results directly against mg/kg criteria, which inflates every volatile result by a factor of one thousand, earns nothing. |
-| 5 | `4` | Qualifies the methylene chloride soil detections as not detected because each falls below five times the 620 ug/kg method blank result, and therefore excludes methylene chloride from the constituents of concern. Carrying the detections forward as site impact earns nothing. |
-| 6 | `5` | Identifies that vinyl chloride was reported not detected at a soil reporting limit of 50 ug/kg, equal to 0.05 mg/kg, which is above the 0.02 mg/kg leaching criterion, so the results do not demonstrate compliance and re-analysis at a lower limit is required. Concluding that vinyl chloride is absent earns nothing. |
-| 7 | `3` | Identifies that the TW-03 volatile aliquot was analysed beyond the holding time, that its detected results are estimated and biased low, and that TW-03 therefore cannot be used to bound the extent of the plume even though its exceedance stands. Ignoring the holding time exceedance earns nothing. |
-| 8 | `2` | Reports the relative percent difference between field duplicate FD-01 and its parent for lead as approximately 78 percent, above the thirty percent limit, and attributes it to fill heterogeneity rather than laboratory performance. Treating the duplicate pair as acceptable, or as evidence of a laboratory problem, earns nothing. |
-| 9 | `3` | Sets arsenic aside as naturally occurring because every result falls within the 4 to 22 mg/kg regional background range, noting that the highest concentration is at the upgradient reference boring. Carrying arsenic forward as a constituent of concern requiring remediation earns nothing. |
-| 10 | `3` | Reports that the soil exceedances are confined to AOC-1, AOC-2 and AOC-3, and that neither boring in the AOC-4 former tank basin exceeded an applicable criterion. Reporting exceedances in all four areas, or omitting the AOC-4 finding, earns nothing. |
-| 11 | `4` | Reports that tetrachloroethene is the only groundwater constituent exceeding an applicable criterion, at TW-02 and TW-03, against the GW-2 value of 300 ug/L, with a maximum of about 1,230 ug/L. Listing metals or other volatiles as groundwater exceedances earns nothing. |
-| 12 | `4` | Uses the non-hazardous disposal rate because both toxicity characteristic leaching results for lead, 1.8 and 3.1 mg/L, are below the 5 mg/L regulatory limit. Applying the hazardous rate on the strength of total lead concentrations, an error worth roughly $334,950, earns nothing. |
-| 13 | `4` | Estimates an in-situ excavation volume of roughly 933 cubic yards and about 1,353 tons, built from the measured feature footprints and the depth intervals that exceed criteria, and limits the excavation to above the water table. A volume derived without reference to the measured footprints or the exceedance depths earns nothing. |
-| 14 | `5` | Produces a remedial cost estimate of approximately $403,820 including the twenty percent contingency, built line by line from the unit rates in the estimating basis. An estimate that does not use those unit rates, or that omits the contingency, earns nothing. |
-| 15 | `4` | States that the recommended remedy exceeds the $350,000 environmental escrow by roughly $53,820, and that under Section 9.1 the excess falls on the buyer. Reporting a cost without comparing it to the escrow cap earns nothing. |
-| 16 | `4` | Quantifies the schedule as approximately 34 days of critical path against the 22 days remaining in the due diligence period, a shortfall of about 12 days. Stating that more time is needed without quantifying it in days earns nothing. |
-| 17 | `3` | Identifies Section 4.3 as the mechanism to resolve the schedule, noting the sixty day maximum, the $75,000 additional deposit credited at closing, and that seller consent is not required. Recommending renegotiation of the closing date without reference to the extension right earns nothing. |
-| 18 | `3` | Reports the contingent cost of about $477,020 should the vapour intrusion evaluation show that a sub-slab depressurisation system is required, and presents it separately from the base estimate. Folding the mitigation cost into the base estimate, or omitting it, earns nothing. |
-| 19 | `5` | Recommends a risk-based approach built on targeted excavation, an activity and use limitation, vapour intrusion evaluation and monitoring, and rejects unrestricted closure on the grounds that residual impact below the water table and the groundwater exceedance make it unachievable rather than merely expensive. A recommendation supported by that feasibility reasoning earns full credit whatever the precise excavation limits chosen. |
-| 20 | `4` | Identifies that Section 9.4 makes the activity and use limitation subject to seller consent, that seller is retaining the adjoining parcel and so has a reason to resist, and that the recommended remedy therefore is not within the buyer's unilateral control. Any handling that names the dependency and states what happens if consent is refused earns full credit. |
-| 21 | `3` | Reaches a supported position on the Known Conditions carve-out in Section 9.2, recognising that the former tank and its agency closure file are described in the Phase I so AOC-4 sits outside the indemnity, while noting that the two borings there found no exceedance. Either concluding the carve-out has no present cost or treating it as a budgeted construction risk earns full credit if the reasoning is given. |
-| 22 | `4` | Concludes that a vapour intrusion evaluation is required, reasoning from the GW-2 exceedance beneath the planned warehouse footprint rather than from a general precaution, and places it before slab design in the sequence. Any conclusion that connects the groundwater result to the planned building and to the design schedule earns full credit. |
-| 23 | `3` | Sets out the remaining data gaps with a duration attached to each, covering at least the vinyl chloride re-analysis and the vapour intrusion round. The specific gaps chosen may vary, but each must carry a stated number of days and the durations must roll up to the critical path figure used elsewhere in the deliverable. |
-| 24 | `2` | Delivers a single file named Fairlead_Phase_II_Evaluation_Memo.docx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing. |
-| 25 | `1` | Presents the work as a memorandum addressed to the client that carries the conclusions, the screening results and the recommendation in the body, so it can be read without reference to an appendix or a separate data package. A bare data dump or an unstructured narrative earns nothing. |
-| 26 | `-5` | Screens groundwater against the GW-1 potable supply criteria, which produces around ten additional apparent exceedances across all three downgradient wells and points toward aquifer restoration that is neither required nor useful at this property. Apply once wherever GW-1 is used as the compliance standard. |
-| 27 | `-5` | Compares soil volatile results reported in ug/kg directly against screening criteria published in mg/kg, overstating every volatile concentration by a factor of one thousand. Apply once wherever the unconverted comparison appears. |
-| 28 | `-4` | Carries the methylene chloride detections forward as site impact and includes them in the constituents of concern or the remedial footprint, when they are attributable to the laboratory method blank. Apply once. |
-| 29 | `-4` | Applies the RCRA hazardous disposal rate of $310.00 per ton when the toxicity characteristic leaching results demonstrate the soil is non-hazardous. Apply once wherever hazardous disposal is assumed in the cost estimate. |
-| 30 | `-4` | Concludes that vinyl chloride is absent or not a concern on the strength of non-detect results, without recognising that the reporting limit achieved is above the applicable criterion. Apply once. |
-| 31 | `-3` | States a figure in one section that contradicts the same figure elsewhere in the deliverable, for example an excavation volume, a cost total or a number of days that differs between the summary and the supporting tables. Apply once. |
+| 1 | `5` | Computes potential to emit on 365 days, being 8,760 hours, and states that the plant's 250 day schedule cannot be credited because Regulation 5.02(b) counts an operating limitation only where it is federally enforceable and no permit condition restricts hours. Using the stated schedule earns nothing. |
+| 2 | `4` | Uses the coating volatile organic compound content less water and exempt compounds of 3.80 lb/gal rather than the as-supplied value of 2.90 lb/gal, consistent with permit condition 3.2. Using the as-supplied value earns nothing. |
+| 3 | `5` | Calculates overall control as the product of capture and destruction, 92% times 98% giving about 90.16%, per Regulation 5.02(d). Crediting the destruction efficiency alone earns nothing. |
+| 4 | `4` | Reports Line 4 potential to emit of about 30.94 tons per year, being the controlled coating stream plus the uncontrolled cleanup solvent. A figure that omits the cleanup solvent or applies control to it earns nothing. |
+| 5 | `4` | Aggregates the August 2025 Line 2 debottleneck of 6.20 tons per year with this project under Regulation 5.03(b), notwithstanding that no permit was obtained for it. Treating Line 4 in isolation earns nothing. |
+| 6 | `3` | Reports a project emissions increase of about 37.14 tons per year and notes that this is below the 40 ton significance threshold. Omitting the comparison, or reporting an increase that excludes the Line 2 change, earns nothing. |
+| 7 | `5` | Computes facility potential to emit after the project as about 119.14 tons per year against the 100 ton major source threshold, and concludes the facility becomes a major stationary source. Stopping at the significance test earns nothing. |
+| 8 | `5` | States that because the project makes a minor source major, Regulation 5.04(b) requires it to be reviewed as a new major stationary source, that the emissions of the entire project are subject to review, and that netting is not available. Concluding that no review is triggered because the increase is below the significance threshold earns nothing. |
+| 9 | `5` | Excludes the 4.20 tons per year of fugitive emissions from the major source determination, because surface coating manufacture is not a listed category under Regulation 5.02(c), and notes that including them would push the recommended option back over the threshold. Including fugitives earns nothing. |
+| 10 | `4` | Concludes that the 14 ton 2022 Line 1 shutdown is not creditable, on the grounds that it was relied upon in full in revision R-23-0412 and that netting is unavailable where a project makes a minor source major. Applying the credit earns nothing. |
+| 11 | `3` | Checks hazardous air pollutants and concludes the facility does not become major, with xylene at about 8.13 tons per year against the 10 ton single pollutant threshold and an aggregate below 25. Omitting the hazardous air pollutant check earns nothing. |
+| 12 | `2` | Treats the cleanup solvent as uncontrolled, at about 2.28 tons per year, because it is not ducted to the oxidiser under either capture arrangement. Applying control to it earns nothing. |
+| 13 | `5` | Demonstrates that a permanent total enclosure raises overall control to about 98% and brings facility potential to emit to roughly 96.30 tons per year, below the major source threshold at full design throughput. An option analysis that does not compute the resulting facility total earns nothing. |
+| 14 | `3` | Quantifies the throughput cap alternative at roughly 138 gallons per day, about 33% of the design rate, and identifies that the limit must be federally enforceable to count. Presenting a cap without the resulting throughput earns nothing. |
+| 15 | `3` | Prices the major source route at about $1,736,461, including offsets of 42.71 tons at the 1.15 to one ratio costing about $401,461. Omitting offsets, or applying them without the ratio, earns nothing. |
+| 16 | `3` | Prices the enclosure route at about $983,000 and quantifies the difference against the major source route at roughly $753,461. Comparing the options without a cost difference earns nothing. |
+| 17 | `3` | States the permitting duration for each route, 14 to 18 months for major source review against 4 to 5 for a minor revision, and relates it to the client's second quarter start. Omitting the schedule earns nothing. |
+| 18 | `5` | Recommends the permanent total enclosure and supports it on both the threshold arithmetic and the permitting schedule, rather than on capital cost alone. Any recommendation that keeps the facility below the major source threshold at full throughput and is justified against cost and schedule together earns full credit; a recommendation with no supporting comparison earns nothing. |
+| 19 | `4` | Corrects the client's stated premise that the project is acceptable because the increase is below forty tons per year, explaining that the significance threshold applies only at a source that is already major. Any explanation that distinguishes the modification test from the new major source test earns full credit. |
+| 20 | `3` | Identifies the unpermitted August 2025 Line 2 change as a compliance matter in its own right, contrary to permit condition 7.2, and reaches a position on how it should be resolved. Either recommending it be regularised within this application or addressed separately earns full credit where the reasoning is given. |
+| 21 | `2` | Notes that the margin to the threshold under the recommended option is only a few tons per year and draws a consequence from it, such as verification of the enclosure or caution about future changes. Any handling that quantifies the headroom and states why it matters earns full credit. |
+| 22 | `2` | Delivers a single file named Cordell_NSR_Analysis.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing. |
+| 23 | `2` | Builds the workbook on live formulas resolving back to the design data and the regulation thresholds, so the determination re-computes if a coating property or a control efficiency changes. A workbook of hard-coded results earns nothing. |
+| 24 | `1` | Leads with a sheet carrying the applicability determination, the recommended route and its cost, so the answer is readable without working through the calculation sheets. Burying the determination among the calculations earns nothing. |
+| 25 | `-5` | Concludes that major source review is not triggered because the project increase of about 37 tons per year is below the significance threshold. Apply once wherever that conclusion is stated. |
+| 26 | `-5` | Calculates potential to emit on the plant's 250 day operating schedule rather than on 8,760 hours. Apply once wherever the restricted schedule is used. |
+| 27 | `-4` | Includes fugitive emissions in the major stationary source determination, when surface coating manufacture is not a listed category. Apply once. |
+| 28 | `-4` | Applies the 2022 Line 1 shutdown as a netting credit against this project. Apply once. |
+| 29 | `-4` | Credits the oxidiser destruction efficiency without applying capture efficiency, or uses the as-supplied coating volatile organic compound content instead of the less water value. Apply once for either error. |
+| 30 | `-3` | States a figure in one place that contradicts the same figure elsewhere in the workbook, for example a potential to emit, a cost total or a control efficiency that differs between the summary sheet and the calculation sheets. Apply once. |
 
 ---
 
 ## Section 3
-
-### How long did this submission take?
 
 Your own clock, in minutes.
 

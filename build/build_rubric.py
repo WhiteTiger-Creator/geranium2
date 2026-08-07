@@ -1,78 +1,50 @@
-"""Generate RUBRIC.md: form-ready criteria, each self-contained and under 500 characters."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import site_data as s
-import evaluate as e
-
+import cordell as c
 OUT = "/home/azureuser/geranium_tasks/task2_env/RUBRIC.md"
-
-ex = e.soil_exceedances()
-real = [x for x in ex if x["kind"] not in ("background", "indeterminate")]
-gwex = e.gw_exceedances()
-V = e.volumes()
-CY = sum(r["cy"] for r in V)
-TONS = sum(r["tons"] for r in V)
-items, sub, cont, TOT = e.cost_estimate()
-_, _, _, TOT2 = e.cost_estimate(include_ssd=True)
-sc = e.schedule()
-HAZ = TONS * (e.unit("Transport and disposal, RCRA") - e.unit("Transport and disposal, non-haz"))
-mc = [s.soil_result(sid, b, top, "Methylene chloride")[0]
-      for sid, b, aoc, top, bot in s.soil_samples()
-      if not s.soil_result(sid, b, top, "Methylene chloride")[1]]
-LEAD_RPD = s.rpd(s.SOIL_HITS[(s.FIELD_DUP[0], s.FIELD_DUP[1])]["Lead"], s.FIELD_DUP[3]["Lead"])
-PCE_MAX_GW = max(g["value"] for g in gwex)
-
+o = c.option_costs(); enc = c.facility_pte_tpy(c.ENCLOSURE_CAPTURE)
 C = [
-("Rigid", 4, f"Applies the industrial and commercial soil direct contact criteria rather than the residential column, and grounds that on the M-2 zoning, the planned distribution warehouse use and the client's acceptance of an activity and use limitation. Applying residential criteria throughout, or switching columns without stating a basis, earns nothing."),
-("Rigid", 3, "Applies the soil to groundwater criteria to every area irrespective of land use classification, and identifies the leaching pathway rather than direct contact as the driver of most of the remedial footprint. Screening soil against direct contact criteria only earns nothing."),
-("Rigid", 5, "Excludes the GW-1 potable supply criteria and screens groundwater against GW-2, on the basis that the surficial aquifer is mapped Class II-B, the property is on municipal water and no private supply wells were found within one mile. Screening groundwater against GW-1 earns nothing."),
-("Rigid", 4, "Converts the laboratory's soil volatile results from ug/kg to mg/kg before comparing them to the screening table, which publishes soil criteria in mg/kg. Comparing ug/kg results directly against mg/kg criteria, which inflates every volatile result by a factor of one thousand, earns nothing."),
-("Rigid", 4, f"Qualifies the methylene chloride soil detections as not detected because each falls below five times the {s.METHOD_BLANK['Methylene chloride']:g} ug/kg method blank result, and therefore excludes methylene chloride from the constituents of concern. Carrying the detections forward as site impact earns nothing."),
-("Rigid", 5, f"Identifies that vinyl chloride was reported not detected at a soil reporting limit of {s.SOIL_RL['Vinyl chloride']:g} ug/kg, equal to {s.SOIL_RL['Vinyl chloride']/1000:g} mg/kg, which is above the {s.SOIL_SL['Vinyl chloride'][2]:g} mg/kg leaching criterion, so the results do not demonstrate compliance and re-analysis at a lower limit is required. Concluding that vinyl chloride is absent earns nothing."),
-("Rigid", 3, "Identifies that the TW-03 volatile aliquot was analysed beyond the holding time, that its detected results are estimated and biased low, and that TW-03 therefore cannot be used to bound the extent of the plume even though its exceedance stands. Ignoring the holding time exceedance earns nothing."),
-("Rigid", 2, f"Reports the relative percent difference between field duplicate FD-01 and its parent for lead as approximately {LEAD_RPD:.0f} percent, above the thirty percent limit, and attributes it to fill heterogeneity rather than laboratory performance. Treating the duplicate pair as acceptable, or as evidence of a laboratory problem, earns nothing."),
-("Rigid", 3, f"Sets arsenic aside as naturally occurring because every result falls within the {s.ARSENIC_BACKGROUND[0]:g} to {s.ARSENIC_BACKGROUND[1]:g} mg/kg regional background range, noting that the highest concentration is at the upgradient reference boring. Carrying arsenic forward as a constituent of concern requiring remediation earns nothing."),
-("Rigid", 3, "Reports that the soil exceedances are confined to AOC-1, AOC-2 and AOC-3, and that neither boring in the AOC-4 former tank basin exceeded an applicable criterion. Reporting exceedances in all four areas, or omitting the AOC-4 finding, earns nothing."),
-("Rigid", 4, f"Reports that tetrachloroethene is the only groundwater constituent exceeding an applicable criterion, at TW-02 and TW-03, against the GW-2 value of {s.GW_SL['Tetrachloroethene'][1]:g} ug/L, with a maximum of about {PCE_MAX_GW:,.0f} ug/L. Listing metals or other volatiles as groundwater exceedances earns nothing."),
-("Rigid", 4, f"Uses the non-hazardous disposal rate because both toxicity characteristic leaching results for lead, {min(s.TCLP.values()):g} and {max(s.TCLP.values()):g} mg/L, are below the {s.TCLP_LIMIT:g} mg/L regulatory limit. Applying the hazardous rate on the strength of total lead concentrations, an error worth roughly ${HAZ:,.0f}, earns nothing."),
-("Rigid", 4, f"Estimates an in-situ excavation volume of roughly {CY:,.0f} cubic yards and about {TONS:,.0f} tons, built from the measured feature footprints and the depth intervals that exceed criteria, and limits the excavation to above the water table. A volume derived without reference to the measured footprints or the exceedance depths earns nothing."),
-("Rigid", 5, f"Produces a remedial cost estimate of approximately ${TOT:,.0f} including the twenty percent contingency, built line by line from the unit rates in the estimating basis. An estimate that does not use those unit rates, or that omits the contingency, earns nothing."),
-("Rigid", 4, f"States that the recommended remedy exceeds the ${s.ESCROW_CAP:,.0f} environmental escrow by roughly ${TOT - s.ESCROW_CAP:,.0f}, and that under Section 9.1 the excess falls on the buyer. Reporting a cost without comparing it to the escrow cap earns nothing."),
-("Rigid", 4, f"Quantifies the schedule as approximately {sc['critical']} days of critical path against the {sc['available']} days remaining in the due diligence period, a shortfall of about {sc['shortfall']} days. Stating that more time is needed without quantifying it in days earns nothing."),
-("Rigid", 3, "Identifies Section 4.3 as the mechanism to resolve the schedule, noting the sixty day maximum, the $75,000 additional deposit credited at closing, and that seller consent is not required. Recommending renegotiation of the closing date without reference to the extension right earns nothing."),
-("Rigid", 3, f"Reports the contingent cost of about ${TOT2:,.0f} should the vapour intrusion evaluation show that a sub-slab depressurisation system is required, and presents it separately from the base estimate. Folding the mitigation cost into the base estimate, or omitting it, earns nothing."),
-("Subjective", 5, "Recommends a risk-based approach built on targeted excavation, an activity and use limitation, vapour intrusion evaluation and monitoring, and rejects unrestricted closure on the grounds that residual impact below the water table and the groundwater exceedance make it unachievable rather than merely expensive. A recommendation supported by that feasibility reasoning earns full credit whatever the precise excavation limits chosen."),
-("Subjective", 4, "Identifies that Section 9.4 makes the activity and use limitation subject to seller consent, that seller is retaining the adjoining parcel and so has a reason to resist, and that the recommended remedy therefore is not within the buyer's unilateral control. Any handling that names the dependency and states what happens if consent is refused earns full credit."),
-("Subjective", 3, "Reaches a supported position on the Known Conditions carve-out in Section 9.2, recognising that the former tank and its agency closure file are described in the Phase I so AOC-4 sits outside the indemnity, while noting that the two borings there found no exceedance. Either concluding the carve-out has no present cost or treating it as a budgeted construction risk earns full credit if the reasoning is given."),
-("Subjective", 4, "Concludes that a vapour intrusion evaluation is required, reasoning from the GW-2 exceedance beneath the planned warehouse footprint rather than from a general precaution, and places it before slab design in the sequence. Any conclusion that connects the groundwater result to the planned building and to the design schedule earns full credit."),
-("Subjective", 3, "Sets out the remaining data gaps with a duration attached to each, covering at least the vinyl chloride re-analysis and the vapour intrusion round. The specific gaps chosen may vary, but each must carry a stated number of days and the durations must roll up to the critical path figure used elsewhere in the deliverable."),
-("Format", 2, "Delivers a single file named Fairlead_Phase_II_Evaluation_Memo.docx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
-("Format", 1, "Presents the work as a memorandum addressed to the client that carries the conclusions, the screening results and the recommendation in the body, so it can be read without reference to an appendix or a separate data package. A bare data dump or an unstructured narrative earns nothing."),
-("Negative", -5, "Screens groundwater against the GW-1 potable supply criteria, which produces around ten additional apparent exceedances across all three downgradient wells and points toward aquifer restoration that is neither required nor useful at this property. Apply once wherever GW-1 is used as the compliance standard."),
-("Negative", -5, "Compares soil volatile results reported in ug/kg directly against screening criteria published in mg/kg, overstating every volatile concentration by a factor of one thousand. Apply once wherever the unconverted comparison appears."),
-("Negative", -4, "Carries the methylene chloride detections forward as site impact and includes them in the constituents of concern or the remedial footprint, when they are attributable to the laboratory method blank. Apply once."),
-("Negative", -4, f"Applies the RCRA hazardous disposal rate of ${e.unit('Transport and disposal, RCRA'):,.2f} per ton when the toxicity characteristic leaching results demonstrate the soil is non-hazardous. Apply once wherever hazardous disposal is assumed in the cost estimate."),
-("Negative", -4, "Concludes that vinyl chloride is absent or not a concern on the strength of non-detect results, without recognising that the reporting limit achieved is above the applicable criterion. Apply once."),
-("Negative", -3, "States a figure in one section that contradicts the same figure elsewhere in the deliverable, for example an excavation volume, a cost total or a number of days that differs between the summary and the supporting tables. Apply once."),
+("Rigid",5,f"Computes potential to emit on {c.PTE_DAYS_PER_YEAR} days, being 8,760 hours, and states that the plant's {c.CLIENT_STATED_DAYS} day schedule cannot be credited because Regulation 5.02(b) counts an operating limitation only where it is federally enforceable and no permit condition restricts hours. Using the stated schedule earns nothing."),
+("Rigid",4,f"Uses the coating volatile organic compound content less water and exempt compounds of {c.COATING['voc_less_water_lb_gal']:.2f} lb/gal rather than the as-supplied value of {c.COATING['voc_as_supplied_lb_gal']:.2f} lb/gal, consistent with permit condition 3.2. Using the as-supplied value earns nothing."),
+("Rigid",5,f"Calculates overall control as the product of capture and destruction, {c.RTO_CAPTURE_AS_DESIGNED:.0%} times {c.RTO_DESTRUCTION:.0%} giving about {c.overall_control(c.RTO_CAPTURE_AS_DESIGNED):.2%}, per Regulation 5.02(d). Crediting the destruction efficiency alone earns nothing."),
+("Rigid",4,f"Reports Line 4 potential to emit of about {c.line4_pte_tpy():.2f} tons per year, being the controlled coating stream plus the uncontrolled cleanup solvent. A figure that omits the cleanup solvent or applies control to it earns nothing."),
+("Rigid",4,f"Aggregates the August 2025 Line 2 debottleneck of {c.LINE2_DEBOTTLENECK['voc_tpy']:.2f} tons per year with this project under Regulation 5.03(b), notwithstanding that no permit was obtained for it. Treating Line 4 in isolation earns nothing."),
+("Rigid",3,f"Reports a project emissions increase of about {c.project_increase_tpy():.2f} tons per year and notes that this is below the {c.SIGNIFICANT_VOC_TPY:.0f} ton significance threshold. Omitting the comparison, or reporting an increase that excludes the Line 2 change, earns nothing."),
+("Rigid",5,f"Computes facility potential to emit after the project as about {c.facility_pte_tpy():.2f} tons per year against the {c.MAJOR_VOC_TPY:.0f} ton major source threshold, and concludes the facility becomes a major stationary source. Stopping at the significance test earns nothing."),
+("Rigid",5,"States that because the project makes a minor source major, Regulation 5.04(b) requires it to be reviewed as a new major stationary source, that the emissions of the entire project are subject to review, and that netting is not available. Concluding that no review is triggered because the increase is below the significance threshold earns nothing."),
+("Rigid",5,f"Excludes the {c.FUGITIVE_VOC_TPY:.2f} tons per year of fugitive emissions from the major source determination, because surface coating manufacture is not a listed category under Regulation 5.02(c), and notes that including them would push the recommended option back over the threshold. Including fugitives earns nothing."),
+("Rigid",4,f"Concludes that the {abs(c.LINE1_SHUTDOWN['voc_tpy']):.0f} ton 2022 Line 1 shutdown is not creditable, on the grounds that it was relied upon in full in revision R-23-0412 and that netting is unavailable where a project makes a minor source major. Applying the credit earns nothing."),
+("Rigid",3,f"Checks hazardous air pollutants and concludes the facility does not become major, with xylene at about {c.hap_after()['Xylene']:.2f} tons per year against the {c.HAP_SINGLE_TPY:.0f} ton single pollutant threshold and an aggregate below {c.HAP_AGGREGATE_TPY:.0f}. Omitting the hazardous air pollutant check earns nothing."),
+("Rigid",2,f"Treats the cleanup solvent as uncontrolled, at about {c.cleanup_voc_tpy():.2f} tons per year, because it is not ducted to the oxidiser under either capture arrangement. Applying control to it earns nothing."),
+("Rigid",5,f"Demonstrates that a permanent total enclosure raises overall control to about {c.overall_control(c.ENCLOSURE_CAPTURE):.0%} and brings facility potential to emit to roughly {enc:.2f} tons per year, below the major source threshold at full design throughput. An option analysis that does not compute the resulting facility total earns nothing."),
+("Rigid",3,f"Quantifies the throughput cap alternative at roughly {c.capped_throughput_gal_day():.0f} gallons per day, about {c.capped_throughput_gal_day()/c.L4_DESIGN_GAL_DAY:.0%} of the design rate, and identifies that the limit must be federally enforceable to count. Presenting a cap without the resulting throughput earns nothing."),
+("Rigid",3,f"Prices the major source route at about ${o['major']:,.0f}, including offsets of {o['offset_tons']:.2f} tons at the {c.OFFSET_RATIO:.2f} to one ratio costing about ${o['offsets']:,.0f}. Omitting offsets, or applying them without the ratio, earns nothing."),
+("Rigid",3,f"Prices the enclosure route at about ${o['enclosure']:,.0f} and quantifies the difference against the major source route at roughly ${o['saving']:,.0f}. Comparing the options without a cost difference earns nothing."),
+("Rigid",3,f"States the permitting duration for each route, {c.SCHEDULE_MONTHS['major source review'][0]} to {c.SCHEDULE_MONTHS['major source review'][1]} months for major source review against {c.SCHEDULE_MONTHS['minor revision'][0]} to {c.SCHEDULE_MONTHS['minor revision'][1]} for a minor revision, and relates it to the client's second quarter start. Omitting the schedule earns nothing."),
+("Subjective",5,"Recommends the permanent total enclosure and supports it on both the threshold arithmetic and the permitting schedule, rather than on capital cost alone. Any recommendation that keeps the facility below the major source threshold at full throughput and is justified against cost and schedule together earns full credit; a recommendation with no supporting comparison earns nothing."),
+("Subjective",4,"Corrects the client's stated premise that the project is acceptable because the increase is below forty tons per year, explaining that the significance threshold applies only at a source that is already major. Any explanation that distinguishes the modification test from the new major source test earns full credit."),
+("Subjective",3,"Identifies the unpermitted August 2025 Line 2 change as a compliance matter in its own right, contrary to permit condition 7.2, and reaches a position on how it should be resolved. Either recommending it be regularised within this application or addressed separately earns full credit where the reasoning is given."),
+("Subjective",2,f"Notes that the margin to the threshold under the recommended option is only a few tons per year and draws a consequence from it, such as verification of the enclosure or caution about future changes. Any handling that quantifies the headroom and states why it matters earns full credit."),
+("Format",2,"Delivers a single file named Cordell_NSR_Analysis.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
+("Format",2,"Builds the workbook on live formulas resolving back to the design data and the regulation thresholds, so the determination re-computes if a coating property or a control efficiency changes. A workbook of hard-coded results earns nothing."),
+("Format",1,"Leads with a sheet carrying the applicability determination, the recommended route and its cost, so the answer is readable without working through the calculation sheets. Burying the determination among the calculations earns nothing."),
+("Negative",-5,f"Concludes that major source review is not triggered because the project increase of about {c.project_increase_tpy():.0f} tons per year is below the significance threshold. Apply once wherever that conclusion is stated."),
+("Negative",-5,f"Calculates potential to emit on the plant's {c.CLIENT_STATED_DAYS} day operating schedule rather than on 8,760 hours. Apply once wherever the restricted schedule is used."),
+("Negative",-4,"Includes fugitive emissions in the major stationary source determination, when surface coating manufacture is not a listed category. Apply once."),
+("Negative",-4,"Applies the 2022 Line 1 shutdown as a netting credit against this project. Apply once."),
+("Negative",-4,"Credits the oxidiser destruction efficiency without applying capture efficiency, or uses the as-supplied coating volatile organic compound content instead of the less water value. Apply once for either error."),
+("Negative",-3,"States a figure in one place that contradicts the same figure elsewhere in the workbook, for example a potential to emit, a cost total or a control efficiency that differs between the summary sheet and the calculation sheets. Apply once."),
 ]
-
-pos = sum(w for k, w, _ in C if w > 0)
-neg = sum(w for k, w, _ in C if w < 0)
-fn = sum(1 for k, w, _ in C if k == "Format")
-fw = sum(w for k, w, _ in C if k == "Format")
-over = [(i, len(t)) for i, (_, _, t) in enumerate(C, 1) if len(t) > 500]
-
-L = ["# Rubric - form-ready criteria", "",
-     f"**{len(C)} criteria.** Paste each string into its own Criterion field; the number goes in the "
-     f"Weight field only.", "",
-     f"Maximum positive reward {pos}. Negative criteria total {neg}.", "",
-     f"- Format criteria: {fn} of {len(C)} ({fn/len(C):.0%}), under the half limit",
-     f"- Format weight: {fw} of {pos} ({fw/pos:.1%}), under the quarter limit",
-     f"- Negative criteria: {sum(1 for k,w,_ in C if w<0)}, above the minimum of two",
-     f"- Longest criterion: {max(len(t) for _,_,t in C)} characters", "", "---", ""]
-for i, (kind, w, text) in enumerate(C, 1):
-    L += [f"### Criterion {i}  ·  weight `{w}`  ·  _{kind}_", "", text, "",
-          f"<sub>{len(text)} / 500 characters</sub>", ""]
-open(OUT, "w").write("\n".join(L) + "\n")
-print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} crit ({fn/len(C):.0%}), {fw/pos:.1%} of reward "
-      f"| longest {max(len(t) for _,_,t in C)} | over 500: {over or 'none'}")
+pos=sum(w for k,w,_ in C if w>0); neg=sum(w for k,w,_ in C if w<0)
+fn=sum(1 for k,w,_ in C if k=="Format"); fw=sum(w for k,w,_ in C if k=="Format")
+over=[(i,len(t)) for i,(_,_,t) in enumerate(C,1) if len(t)>500]
+L=["# Rubric - form-ready criteria","",f"**{len(C)} criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.","",
+   f"Maximum positive reward {pos}. Negative criteria total {neg}.","",
+   f"- Format criteria: {fn} of {len(C)} ({fn/len(C):.0%}), under the half limit",
+   f"- Format weight: {fw} of {pos} ({fw/pos:.1%}), under the quarter limit",
+   f"- Negative criteria: {sum(1 for k,w,_ in C if w<0)}, above the minimum of two",
+   f"- Longest criterion: {max(len(t) for _,_,t in C)} characters","","---",""]
+for i,(k,w,t) in enumerate(C,1):
+    L+=[f"### Criterion {i}  ·  weight `{w}`  ·  _{k}_","",t,"",f"<sub>{len(t)} / 500 characters</sub>",""]
+open(OUT,"w").write("\n".join(L)+"\n")
+print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} ({fn/len(C):.0%}), {fw/pos:.1%} of reward | longest {max(len(t) for _,_,t in C)} | over 500: {over or 'none'}")

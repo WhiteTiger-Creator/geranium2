@@ -1,199 +1,193 @@
 # Rubric - form-ready criteria
 
-**31 criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.
+**30 criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.
 
-Maximum positive reward 89. Negative criteria total -25.
+Maximum positive reward 85. Negative criteria total -25.
 
-- Format criteria: 2 of 31 (6%), under the half limit
-- Format weight: 3 of 89 (3.4%), under the quarter limit
+- Format criteria: 3 of 30 (10%), under the half limit
+- Format weight: 5 of 85 (5.9%), under the quarter limit
 - Negative criteria: 6, above the minimum of two
-- Longest criterion: 433 characters
+- Longest criterion: 381 characters
 
 ---
 
-### Criterion 1  ·  weight `4`  ·  _Rigid_
+### Criterion 1  ·  weight `5`  ·  _Rigid_
 
-Applies the industrial and commercial soil direct contact criteria rather than the residential column, and grounds that on the M-2 zoning, the planned distribution warehouse use and the client's acceptance of an activity and use limitation. Applying residential criteria throughout, or switching columns without stating a basis, earns nothing.
+Computes potential to emit on 365 days, being 8,760 hours, and states that the plant's 250 day schedule cannot be credited because Regulation 5.02(b) counts an operating limitation only where it is federally enforceable and no permit condition restricts hours. Using the stated schedule earns nothing.
 
-<sub>343 / 500 characters</sub>
+<sub>301 / 500 characters</sub>
 
-### Criterion 2  ·  weight `3`  ·  _Rigid_
+### Criterion 2  ·  weight `4`  ·  _Rigid_
 
-Applies the soil to groundwater criteria to every area irrespective of land use classification, and identifies the leaching pathway rather than direct contact as the driver of most of the remedial footprint. Screening soil against direct contact criteria only earns nothing.
+Uses the coating volatile organic compound content less water and exempt compounds of 3.80 lb/gal rather than the as-supplied value of 2.90 lb/gal, consistent with permit condition 3.2. Using the as-supplied value earns nothing.
 
-<sub>274 / 500 characters</sub>
+<sub>228 / 500 characters</sub>
 
 ### Criterion 3  ·  weight `5`  ·  _Rigid_
 
-Excludes the GW-1 potable supply criteria and screens groundwater against GW-2, on the basis that the surficial aquifer is mapped Class II-B, the property is on municipal water and no private supply wells were found within one mile. Screening groundwater against GW-1 earns nothing.
+Calculates overall control as the product of capture and destruction, 92% times 98% giving about 90.16%, per Regulation 5.02(d). Crediting the destruction efficiency alone earns nothing.
 
-<sub>282 / 500 characters</sub>
+<sub>186 / 500 characters</sub>
 
 ### Criterion 4  ·  weight `4`  ·  _Rigid_
 
-Converts the laboratory's soil volatile results from ug/kg to mg/kg before comparing them to the screening table, which publishes soil criteria in mg/kg. Comparing ug/kg results directly against mg/kg criteria, which inflates every volatile result by a factor of one thousand, earns nothing.
+Reports Line 4 potential to emit of about 30.94 tons per year, being the controlled coating stream plus the uncontrolled cleanup solvent. A figure that omits the cleanup solvent or applies control to it earns nothing.
 
-<sub>291 / 500 characters</sub>
+<sub>217 / 500 characters</sub>
 
 ### Criterion 5  ·  weight `4`  ·  _Rigid_
 
-Qualifies the methylene chloride soil detections as not detected because each falls below five times the 620 ug/kg method blank result, and therefore excludes methylene chloride from the constituents of concern. Carrying the detections forward as site impact earns nothing.
+Aggregates the August 2025 Line 2 debottleneck of 6.20 tons per year with this project under Regulation 5.03(b), notwithstanding that no permit was obtained for it. Treating Line 4 in isolation earns nothing.
 
-<sub>273 / 500 characters</sub>
+<sub>208 / 500 characters</sub>
 
-### Criterion 6  ·  weight `5`  ·  _Rigid_
+### Criterion 6  ·  weight `3`  ·  _Rigid_
 
-Identifies that vinyl chloride was reported not detected at a soil reporting limit of 50 ug/kg, equal to 0.05 mg/kg, which is above the 0.02 mg/kg leaching criterion, so the results do not demonstrate compliance and re-analysis at a lower limit is required. Concluding that vinyl chloride is absent earns nothing.
+Reports a project emissions increase of about 37.14 tons per year and notes that this is below the 40 ton significance threshold. Omitting the comparison, or reporting an increase that excludes the Line 2 change, earns nothing.
 
-<sub>313 / 500 characters</sub>
+<sub>227 / 500 characters</sub>
 
-### Criterion 7  ·  weight `3`  ·  _Rigid_
+### Criterion 7  ·  weight `5`  ·  _Rigid_
 
-Identifies that the TW-03 volatile aliquot was analysed beyond the holding time, that its detected results are estimated and biased low, and that TW-03 therefore cannot be used to bound the extent of the plume even though its exceedance stands. Ignoring the holding time exceedance earns nothing.
+Computes facility potential to emit after the project as about 119.14 tons per year against the 100 ton major source threshold, and concludes the facility becomes a major stationary source. Stopping at the significance test earns nothing.
+
+<sub>238 / 500 characters</sub>
+
+### Criterion 8  ·  weight `5`  ·  _Rigid_
+
+States that because the project makes a minor source major, Regulation 5.04(b) requires it to be reviewed as a new major stationary source, that the emissions of the entire project are subject to review, and that netting is not available. Concluding that no review is triggered because the increase is below the significance threshold earns nothing.
+
+<sub>349 / 500 characters</sub>
+
+### Criterion 9  ·  weight `5`  ·  _Rigid_
+
+Excludes the 4.20 tons per year of fugitive emissions from the major source determination, because surface coating manufacture is not a listed category under Regulation 5.02(c), and notes that including them would push the recommended option back over the threshold. Including fugitives earns nothing.
+
+<sub>301 / 500 characters</sub>
+
+### Criterion 10  ·  weight `4`  ·  _Rigid_
+
+Concludes that the 14 ton 2022 Line 1 shutdown is not creditable, on the grounds that it was relied upon in full in revision R-23-0412 and that netting is unavailable where a project makes a minor source major. Applying the credit earns nothing.
+
+<sub>245 / 500 characters</sub>
+
+### Criterion 11  ·  weight `3`  ·  _Rigid_
+
+Checks hazardous air pollutants and concludes the facility does not become major, with xylene at about 8.13 tons per year against the 10 ton single pollutant threshold and an aggregate below 25. Omitting the hazardous air pollutant check earns nothing.
+
+<sub>252 / 500 characters</sub>
+
+### Criterion 12  ·  weight `2`  ·  _Rigid_
+
+Treats the cleanup solvent as uncontrolled, at about 2.28 tons per year, because it is not ducted to the oxidiser under either capture arrangement. Applying control to it earns nothing.
+
+<sub>185 / 500 characters</sub>
+
+### Criterion 13  ·  weight `5`  ·  _Rigid_
+
+Demonstrates that a permanent total enclosure raises overall control to about 98% and brings facility potential to emit to roughly 96.30 tons per year, below the major source threshold at full design throughput. An option analysis that does not compute the resulting facility total earns nothing.
 
 <sub>296 / 500 characters</sub>
 
-### Criterion 8  ·  weight `2`  ·  _Rigid_
+### Criterion 14  ·  weight `3`  ·  _Rigid_
 
-Reports the relative percent difference between field duplicate FD-01 and its parent for lead as approximately 78 percent, above the thirty percent limit, and attributes it to fill heterogeneity rather than laboratory performance. Treating the duplicate pair as acceptable, or as evidence of a laboratory problem, earns nothing.
+Quantifies the throughput cap alternative at roughly 138 gallons per day, about 33% of the design rate, and identifies that the limit must be federally enforceable to count. Presenting a cap without the resulting throughput earns nothing.
 
-<sub>328 / 500 characters</sub>
+<sub>238 / 500 characters</sub>
 
-### Criterion 9  ·  weight `3`  ·  _Rigid_
+### Criterion 15  ·  weight `3`  ·  _Rigid_
 
-Sets arsenic aside as naturally occurring because every result falls within the 4 to 22 mg/kg regional background range, noting that the highest concentration is at the upgradient reference boring. Carrying arsenic forward as a constituent of concern requiring remediation earns nothing.
+Prices the major source route at about $1,736,461, including offsets of 42.71 tons at the 1.15 to one ratio costing about $401,461. Omitting offsets, or applying them without the ratio, earns nothing.
 
-<sub>287 / 500 characters</sub>
+<sub>200 / 500 characters</sub>
 
-### Criterion 10  ·  weight `3`  ·  _Rigid_
+### Criterion 16  ·  weight `3`  ·  _Rigid_
 
-Reports that the soil exceedances are confined to AOC-1, AOC-2 and AOC-3, and that neither boring in the AOC-4 former tank basin exceeded an applicable criterion. Reporting exceedances in all four areas, or omitting the AOC-4 finding, earns nothing.
+Prices the enclosure route at about $983,000 and quantifies the difference against the major source route at roughly $753,461. Comparing the options without a cost difference earns nothing.
 
-<sub>249 / 500 characters</sub>
-
-### Criterion 11  ·  weight `4`  ·  _Rigid_
-
-Reports that tetrachloroethene is the only groundwater constituent exceeding an applicable criterion, at TW-02 and TW-03, against the GW-2 value of 300 ug/L, with a maximum of about 1,230 ug/L. Listing metals or other volatiles as groundwater exceedances earns nothing.
-
-<sub>269 / 500 characters</sub>
-
-### Criterion 12  ·  weight `4`  ·  _Rigid_
-
-Uses the non-hazardous disposal rate because both toxicity characteristic leaching results for lead, 1.8 and 3.1 mg/L, are below the 5 mg/L regulatory limit. Applying the hazardous rate on the strength of total lead concentrations, an error worth roughly $334,950, earns nothing.
-
-<sub>279 / 500 characters</sub>
-
-### Criterion 13  ·  weight `4`  ·  _Rigid_
-
-Estimates an in-situ excavation volume of roughly 933 cubic yards and about 1,353 tons, built from the measured feature footprints and the depth intervals that exceed criteria, and limits the excavation to above the water table. A volume derived without reference to the measured footprints or the exceedance depths earns nothing.
-
-<sub>330 / 500 characters</sub>
-
-### Criterion 14  ·  weight `5`  ·  _Rigid_
-
-Produces a remedial cost estimate of approximately $403,820 including the twenty percent contingency, built line by line from the unit rates in the estimating basis. An estimate that does not use those unit rates, or that omits the contingency, earns nothing.
-
-<sub>259 / 500 characters</sub>
-
-### Criterion 15  ·  weight `4`  ·  _Rigid_
-
-States that the recommended remedy exceeds the $350,000 environmental escrow by roughly $53,820, and that under Section 9.1 the excess falls on the buyer. Reporting a cost without comparing it to the escrow cap earns nothing.
-
-<sub>225 / 500 characters</sub>
-
-### Criterion 16  ·  weight `4`  ·  _Rigid_
-
-Quantifies the schedule as approximately 34 days of critical path against the 22 days remaining in the due diligence period, a shortfall of about 12 days. Stating that more time is needed without quantifying it in days earns nothing.
-
-<sub>233 / 500 characters</sub>
+<sub>189 / 500 characters</sub>
 
 ### Criterion 17  ·  weight `3`  ·  _Rigid_
 
-Identifies Section 4.3 as the mechanism to resolve the schedule, noting the sixty day maximum, the $75,000 additional deposit credited at closing, and that seller consent is not required. Recommending renegotiation of the closing date without reference to the extension right earns nothing.
+States the permitting duration for each route, 14 to 18 months for major source review against 4 to 5 for a minor revision, and relates it to the client's second quarter start. Omitting the schedule earns nothing.
 
-<sub>290 / 500 characters</sub>
+<sub>213 / 500 characters</sub>
 
-### Criterion 18  ·  weight `3`  ·  _Rigid_
+### Criterion 18  ·  weight `5`  ·  _Subjective_
 
-Reports the contingent cost of about $477,020 should the vapour intrusion evaluation show that a sub-slab depressurisation system is required, and presents it separately from the base estimate. Folding the mitigation cost into the base estimate, or omitting it, earns nothing.
+Recommends the permanent total enclosure and supports it on both the threshold arithmetic and the permitting schedule, rather than on capital cost alone. Any recommendation that keeps the facility below the major source threshold at full throughput and is justified against cost and schedule together earns full credit; a recommendation with no supporting comparison earns nothing.
 
-<sub>276 / 500 characters</sub>
+<sub>381 / 500 characters</sub>
 
-### Criterion 19  ·  weight `5`  ·  _Subjective_
+### Criterion 19  ·  weight `4`  ·  _Subjective_
 
-Recommends a risk-based approach built on targeted excavation, an activity and use limitation, vapour intrusion evaluation and monitoring, and rejects unrestricted closure on the grounds that residual impact below the water table and the groundwater exceedance make it unachievable rather than merely expensive. A recommendation supported by that feasibility reasoning earns full credit whatever the precise excavation limits chosen.
+Corrects the client's stated premise that the project is acceptable because the increase is below forty tons per year, explaining that the significance threshold applies only at a source that is already major. Any explanation that distinguishes the modification test from the new major source test earns full credit.
 
-<sub>433 / 500 characters</sub>
+<sub>316 / 500 characters</sub>
 
-### Criterion 20  ·  weight `4`  ·  _Subjective_
+### Criterion 20  ·  weight `3`  ·  _Subjective_
 
-Identifies that Section 9.4 makes the activity and use limitation subject to seller consent, that seller is retaining the adjoining parcel and so has a reason to resist, and that the recommended remedy therefore is not within the buyer's unilateral control. Any handling that names the dependency and states what happens if consent is refused earns full credit.
+Identifies the unpermitted August 2025 Line 2 change as a compliance matter in its own right, contrary to permit condition 7.2, and reaches a position on how it should be resolved. Either recommending it be regularised within this application or addressed separately earns full credit where the reasoning is given.
 
-<sub>361 / 500 characters</sub>
+<sub>314 / 500 characters</sub>
 
-### Criterion 21  ·  weight `3`  ·  _Subjective_
+### Criterion 21  ·  weight `2`  ·  _Subjective_
 
-Reaches a supported position on the Known Conditions carve-out in Section 9.2, recognising that the former tank and its agency closure file are described in the Phase I so AOC-4 sits outside the indemnity, while noting that the two borings there found no exceedance. Either concluding the carve-out has no present cost or treating it as a budgeted construction risk earns full credit if the reasoning is given.
+Notes that the margin to the threshold under the recommended option is only a few tons per year and draws a consequence from it, such as verification of the enclosure or caution about future changes. Any handling that quantifies the headroom and states why it matters earns full credit.
 
-<sub>410 / 500 characters</sub>
+<sub>286 / 500 characters</sub>
 
-### Criterion 22  ·  weight `4`  ·  _Subjective_
+### Criterion 22  ·  weight `2`  ·  _Format_
 
-Concludes that a vapour intrusion evaluation is required, reasoning from the GW-2 exceedance beneath the planned warehouse footprint rather than from a general precaution, and places it before slab design in the sequence. Any conclusion that connects the groundwater result to the planned building and to the design schedule earns full credit.
+Delivers a single file named Cordell_NSR_Analysis.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing.
 
-<sub>343 / 500 characters</sub>
+<sub>198 / 500 characters</sub>
 
-### Criterion 23  ·  weight `3`  ·  _Subjective_
+### Criterion 23  ·  weight `2`  ·  _Format_
 
-Sets out the remaining data gaps with a duration attached to each, covering at least the vinyl chloride re-analysis and the vapour intrusion round. The specific gaps chosen may vary, but each must carry a stated number of days and the durations must roll up to the critical path figure used elsewhere in the deliverable.
+Builds the workbook on live formulas resolving back to the design data and the regulation thresholds, so the determination re-computes if a coating property or a control efficiency changes. A workbook of hard-coded results earns nothing.
 
-<sub>320 / 500 characters</sub>
+<sub>237 / 500 characters</sub>
 
-### Criterion 24  ·  weight `2`  ·  _Format_
+### Criterion 24  ·  weight `1`  ·  _Format_
 
-Delivers a single file named Fairlead_Phase_II_Evaluation_Memo.docx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing.
+Leads with a sheet carrying the applicability determination, the recommended route and its cost, so the answer is readable without working through the calculation sheets. Burying the determination among the calculations earns nothing.
 
-<sub>211 / 500 characters</sub>
+<sub>234 / 500 characters</sub>
 
-### Criterion 25  ·  weight `1`  ·  _Format_
+### Criterion 25  ·  weight `-5`  ·  _Negative_
 
-Presents the work as a memorandum addressed to the client that carries the conclusions, the screening results and the recommendation in the body, so it can be read without reference to an appendix or a separate data package. A bare data dump or an unstructured narrative earns nothing.
+Concludes that major source review is not triggered because the project increase of about 37 tons per year is below the significance threshold. Apply once wherever that conclusion is stated.
 
-<sub>285 / 500 characters</sub>
+<sub>190 / 500 characters</sub>
 
 ### Criterion 26  ·  weight `-5`  ·  _Negative_
 
-Screens groundwater against the GW-1 potable supply criteria, which produces around ten additional apparent exceedances across all three downgradient wells and points toward aquifer restoration that is neither required nor useful at this property. Apply once wherever GW-1 is used as the compliance standard.
+Calculates potential to emit on the plant's 250 day operating schedule rather than on 8,760 hours. Apply once wherever the restricted schedule is used.
 
-<sub>308 / 500 characters</sub>
+<sub>151 / 500 characters</sub>
 
-### Criterion 27  ·  weight `-5`  ·  _Negative_
+### Criterion 27  ·  weight `-4`  ·  _Negative_
 
-Compares soil volatile results reported in ug/kg directly against screening criteria published in mg/kg, overstating every volatile concentration by a factor of one thousand. Apply once wherever the unconverted comparison appears.
+Includes fugitive emissions in the major stationary source determination, when surface coating manufacture is not a listed category. Apply once.
 
-<sub>230 / 500 characters</sub>
+<sub>144 / 500 characters</sub>
 
 ### Criterion 28  ·  weight `-4`  ·  _Negative_
 
-Carries the methylene chloride detections forward as site impact and includes them in the constituents of concern or the remedial footprint, when they are attributable to the laboratory method blank. Apply once.
+Applies the 2022 Line 1 shutdown as a netting credit against this project. Apply once.
 
-<sub>211 / 500 characters</sub>
+<sub>86 / 500 characters</sub>
 
 ### Criterion 29  ·  weight `-4`  ·  _Negative_
 
-Applies the RCRA hazardous disposal rate of $310.00 per ton when the toxicity characteristic leaching results demonstrate the soil is non-hazardous. Apply once wherever hazardous disposal is assumed in the cost estimate.
+Credits the oxidiser destruction efficiency without applying capture efficiency, or uses the as-supplied coating volatile organic compound content instead of the less water value. Apply once for either error.
 
-<sub>220 / 500 characters</sub>
+<sub>208 / 500 characters</sub>
 
-### Criterion 30  ·  weight `-4`  ·  _Negative_
+### Criterion 30  ·  weight `-3`  ·  _Negative_
 
-Concludes that vinyl chloride is absent or not a concern on the strength of non-detect results, without recognising that the reporting limit achieved is above the applicable criterion. Apply once.
+States a figure in one place that contradicts the same figure elsewhere in the workbook, for example a potential to emit, a cost total or a control efficiency that differs between the summary sheet and the calculation sheets. Apply once.
 
-<sub>196 / 500 characters</sub>
-
-### Criterion 31  ·  weight `-3`  ·  _Negative_
-
-States a figure in one section that contradicts the same figure elsewhere in the deliverable, for example an excavation volume, a cost total or a number of days that differs between the summary and the supporting tables. Apply once.
-
-<sub>232 / 500 characters</sub>
+<sub>237 / 500 characters</sub>
 
