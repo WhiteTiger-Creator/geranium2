@@ -1,54 +1,53 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import tracker as t
+import cutover as c
 OUT="/home/azureuser/geranium_tasks/task2_env/RUBRIC.md"
-rows=t.build_sample(); med,cut=t.flag_quality(rows); cl=t.cleaned(rows)
-w0=t.rake(cl); w=t.trim_and_rerake(cl,w0); n=len(cl)
-sp=sum(1 for x in rows if x["_speeder"]); st=sum(1 for x in rows if x["_straight"])
-uw,ww=t.umean(cl,'aware'),t.wmean(cl,w,'aware')
-u35=sum(1 for x in cl if x["age_band"]=="18-34")/n; o65=sum(1 for x in cl if x["age_band"]=="65+")/n
+s=c.solve(); wv=c.waves(s)
+LAST=max(v['live'] for v in s.values()); FLOAT=c.LAST_WEEK-LAST
+BL=sorted(w for w in c.BLACKOUT if w<=c.LAST_WEEK)
+CORLATE=c.LAST_WEEK-c.SITE['COR']['weeks']-c.VALIDATION_WEEKS
+NDEP=sum(1 for x in c.SITE.values() if 'BRD' in x['deps'])
 C=[
-("Rigid",4,f"Applies the speeder rule before weighting, using a threshold of one third of the wave median length of interview, which is about {cut:.2f} minutes against a median of {med:.1f}, and removes about {sp} respondents. Weighting an uncleaned file, or setting the threshold by any other rule, earns nothing."),
-("Rigid",4,f"Removes about {st} straightliners, defined as an identical response to all eight battery items, counts respondents failing both quality rules once rather than twice, and arrives at a cleaned base of about {n}. A base materially different from that earns nothing."),
-("Rigid",5,"Rakes to the three margins in the method note and to those only: age band by gender interlocked, region, and highest educational attainment. Adding a margin, or dropping one, earns nothing."),
-("Rigid",5,f"Does not use the syndicated category incidence figure of {t.CATEGORY_INCIDENCE_SYNDICATED:.0%} as a weighting margin, and states why: it is drawn from adults 21 and over on a three month recall window rather than this tracker's universe and twelve month definition, and category use is a measured outcome here rather than a demographic frame. Raking to it earns nothing."),
-("Rigid",3,"Treats age by gender as a single interlocked margin of eight cells rather than as two separate margins. Raking to age and gender independently earns nothing."),
-("Rigid",4,f"Trims the fitted weights at {t.TRIM_LOW:.2f} and {t.TRIM_HIGH:.2f} and repeats the fit after trimming, rather than trimming and stopping. About nine weights exceed the upper bound before trimming. Trimming without re-fitting, which leaves the margins no longer matching the benchmarks, earns nothing."),
-("Rigid",4,f"Reports an effective sample size of about {t.ess(w):.0f}, computed as the square of the sum of the weights over the sum of the squared weights. A figure materially different, or the achieved sample size reported as the effective one, earns nothing."),
-("Rigid",3,f"Reports a design effect of about {t.deff(w):.2f}, being the achieved sample size over the effective sample size. Omitting the design effect earns nothing."),
-("Rigid",5,f"Reports the margin of error on the effective sample size, giving about {t.moe(w)*100:.2f} percentage points at ninety five percent confidence near a fifty percent proportion, rather than about {1.96*(0.25/n)**0.5*100:.2f} points computed on the achieved sample. Reporting the achieved-base figure earns nothing."),
-("Rigid",3,f"Reports unweighted wave 12 awareness of about {uw*100:.1f} per cent, and identifies it as the figure that produced the client's query rather than as the result. Presenting it as the wave 12 result earns nothing."),
-("Rigid",5,f"Reports weighted wave 12 awareness of about {ww*100:.1f} per cent. A figure materially different from that, on the method note's scheme, earns nothing."),
-("Rigid",5,f"States that the apparent change against wave 11 is about {(uw-0.664)*100:+.1f} points unweighted while the change on the weighted basis is about {(ww-0.664)*100:+.1f} points, and presents the second as the comparable figure. Reporting only one of the two earns nothing."),
-("Rigid",4,f"Quantifies the composition problem, with respondents under 35 at about {u35*100:.0f} per cent of the cleaned sample against a benchmark of {sum(v for (a,g),v in t.AGE_GENDER.items() if a=='18-34')*100:.0f} per cent, and those 65 and over at about {o65*100:.0f} per cent against {sum(v for (a,g),v in t.AGE_GENDER.items() if a=='65+')*100:.0f} per cent. Asserting a skew without quantifying it earns nothing."),
-("Rigid",4,"Restricts the past twelve month use measure to respondents interviewed on days 3 to 9, because the screener on days 1 and 2 asked about a three month window and does not measure the same thing. Reporting that metric across all field days earns nothing."),
-("Rigid",2,"Demonstrates that the weighted sample reproduces each benchmark margin, with the weighted shares matching the population targets on all three margins. Omitting the margin check earns nothing."),
-("Rigid",2,"Reports the headline metrics on a base of all adults rather than on category users, consistent with the method note. Rebasing to category users earns nothing."),
-("Subjective",5,"Attributes the apparent decline to sample composition arising from the panel supplier substitution, and supports that with the age profile of the achieved sample rather than asserting it. Any explanation that connects the supplier change to the age skew and the age skew to awareness earns full credit; attributing the movement to a change in the market earns nothing."),
-("Subjective",4,"Concludes that the brand is flat within the margin of error rather than that it has declined, and expresses that against the corrected figure and the reported precision. Any conclusion that compares the weighted change to the margin of error earns full credit."),
-("Subjective",3,"Explains why the syndicated incidence figure was set aside, addressing both the mismatch in universe and recall window and its status as an outcome rather than a frame. Any explanation covering either ground earns full credit; setting it aside silently earns nothing."),
-("Subjective",3,"Draws out the precision cost of correcting a wave with two short cells, noting that the effective sample is materially below the achieved sample and that the wave is therefore less precise than usual. Any treatment that connects the shortfalls to the design effect earns full credit."),
-("Subjective",3,"Handles the screener change by stating the base used for the affected metric rather than dropping the metric or reporting it without qualification. Either restricting the base or suppressing the metric earns full credit where the reason is stated."),
-("Format",2,"Delivers a single file named Wave12_Weighted.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
-("Format",2,"Delivers the cleaned respondent file with a weight against every retained row, not summary tables alone, so the client's analyst can reproduce the estimates. Summary output without respondent-level weights earns nothing."),
-("Format",1,"Computes the reported estimates and diagnostics as formulas over the weight column rather than typing in results, so the figures recompute if a weight changes. Hard-coded summary figures earn nothing."),
-("Negative",-5,"Reports the unweighted awareness figure as the wave 12 result, or places it on the trend line alongside prior waves as a comparable value. Apply once."),
-("Negative",-5,"Uses the syndicated category incidence figure as a raking margin. Apply once."),
-("Negative",-4,"Reports the margin of error on the achieved sample size rather than the effective sample size, overstating the precision of the wave. Apply once."),
-("Negative",-3,"Trims the weights without repeating the fit afterwards, leaving the weighted margins no longer matching the population benchmarks. Apply once."),
-("Negative",-3,"Applies the quality removals after weighting rather than before, so the weights are fitted on respondents who are then discarded. Apply once."),
-("Negative",-3,"Reports past twelve month use across all field days without addressing the screener wording change on days 1 and 2. Apply once."),
+("Rigid",5,f"Places Bridgnorth in the first wave, on the ground that it owns material master and {NDEP} of the fourteen sites cannot start until it completes. Any plan that schedules Bridgnorth after another dependent site earns nothing."),
+("Rigid",4,"Schedules all three master data owners, Bridgnorth, Halesworth and Kinloss, in the first wave so that the dependency chain is released as early as possible. Scheduling a master data owner behind a site that consumes its domain earns nothing."),
+("Rigid",5,f"Schedules Cork early rather than late, recognising that its {c.VALIDATION_WEEKS} week validation period runs after the technical cutover and that it must therefore begin by about programme week {CORLATE} to be live before support ends. Placing Cork in the final waves because it is the smallest site earns nothing."),
+("Rigid",5,f"Starts Sarnia in programme week {c.SITE['SAR']['shutdown'][0]} and Mobile in programme week {c.SITE['MOB']['shutdown'][0]}, being their annual shutdown windows, and treats those weeks as fixed points around which the rest of the plan is built. Starting either site in any other week earns nothing."),
+("Rigid",5,f"Places no cutover in a financial blackout week and allows none to run through one. The blackout weeks are {', '.join(str(w) for w in BL)}. A plan in which any site's cutover spans a blackout week earns nothing."),
+("Rigid",5,f"Keeps the number of sites in cutover in any programme week at or below {c.TEAMS}, the number of deployment teams. A plan requiring a fourth concurrent team in any week earns nothing."),
+("Rigid",5,f"Brings every site live on or before programme week {c.LAST_WEEK}, the week in which legacy support ends, treating Cork's live date as the end of validation rather than the end of its technical cutover. A plan in which any site goes live later earns nothing."),
+("Rigid",4,"Respects every master data dependency listed in the site profile, so that no site begins its cutover before each of the sites it depends on has completed. A plan violating any single dependency earns nothing."),
+("Rigid",4,f"Uses the cutover durations given in the site profile without altering them, so that the fourteen sites consume {sum(x['weeks'] for x in c.SITE.values())} team weeks in total. Shortening a duration to make the plan fit earns nothing."),
+("Rigid",3,f"Reports the last go-live as about programme week {LAST} and the float to the support deadline as about {FLOAT} weeks. Presenting a plan without stating how much room is left earns nothing."),
+("Rigid",3,"Assigns each site to a named deployment team and shows the loading week by week, so that the concurrency constraint can be seen rather than asserted. A plan giving dates without team assignment earns nothing."),
+("Rigid",3,f"Does not schedule Charleston in the first wave despite it being the largest site at {c.SITE['CHA']['users']} users, because it depends on both Bridgnorth and Halesworth. A size-ordered plan that leads with Charleston earns nothing."),
+("Rigid",2,"Converts programme week numbers to calendar dates using the stated start of programme week 1, so the plan can be read against the client's calendar. A plan expressed only in week numbers earns nothing."),
+("Rigid",2,"Treats validation at Cork as not occupying a deployment team, so the team is released at the end of the technical cutover rather than at go-live. Holding a team through validation earns nothing."),
+("Subjective",5,"Explains the sequence as driven by freedom of movement rather than by site size or importance, identifying the master data owners, the two shutdown windows and the regulated site as the fixed points and fitting the remaining sites around them. Any explanation that identifies those constraints as governing earns full credit; a plan presented without a rationale earns nothing."),
+("Subjective",4,"Identifies which sites carry programme risk and why, recognising that a slip on Bridgnorth moves the eleven sites that depend on it and that a slip causing Sarnia or Mobile to miss its shutdown window moves that site by a full year. Any risk treatment that distinguishes the sites with no recovery from those with float earns full credit."),
+("Subjective",3,"Addresses the two failed internal attempts described in the brief, showing why a size-ordered sequence and an evenly spread sequence each break. Any explanation that names the specific constraint each approach violates earns full credit."),
+("Subjective",3,"Shows each constraint as satisfied by the plan rather than stating that it has been met, so the steering committee can verify the plan rather than trust it. Any presentation that tests the constraints against the schedule itself earns full credit."),
+("Subjective",3,"Locates where the float sits in the programme and observes which sites it does and does not protect, noting that float at the end of the programme does not help the shutdown sites or the regulated site. Any treatment that connects the float to specific sites earns full credit."),
+("Format",2,"Delivers a single file named Cutover_Plan.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing."),
+("Format",2,"Presents the plan as a schedule that can be read directly, with one row per site carrying wave, team, start week and calendar date, rather than as narrative describing what the sequence should be. A prose description without a schedule earns nothing."),
+("Format",1,"Shows team loading across the programme weeks so that concurrency and the blackout periods are visible. A plan without a time-phased view earns nothing."),
+("Negative",-5,"Produces a plan in which any site begins its cutover before a site it depends on for master data has completed. Apply once."),
+("Negative",-5,"Produces a plan in which more than three sites are in cutover in any programme week. Apply once."),
+("Negative",-5,"Starts Sarnia or Mobile outside its stated shutdown window. Apply once for either."),
+("Negative",-4,"Places Cork in the final waves, so that its validation period runs past the end of legacy support. Apply once."),
+("Negative",-4,"Schedules any cutover to start in or run through a financial blackout week. Apply once."),
+("Negative",-3,"Treats Cork as live at the end of its technical cutover rather than at the end of validation, understating the date by which it must start. Apply once."),
+("Negative",-3,"Alters a cutover duration, adds a fourth deployment team, or moves a shutdown window in order to make the plan fit, when the brief states that none of these is available. Apply once."),
 ]
-pos=sum(x for k,x,_ in C if x>0); neg=sum(x for k,x,_ in C if x<0)
-fn=sum(1 for k,x,_ in C if k=="Format"); fw=sum(x for k,x,_ in C if k=="Format")
-over=[(i,len(s)) for i,(_,_,s) in enumerate(C,1) if len(s)>500]
+pos=sum(w for k,w,_ in C if w>0); neg=sum(w for k,w,_ in C if w<0)
+fn=sum(1 for k,w,_ in C if k=="Format"); fw=sum(w for k,w,_ in C if k=="Format")
+over=[(i,len(t)) for i,(_,_,t) in enumerate(C,1) if len(t)>500]
 L=["# Rubric - form-ready criteria","",f"**{len(C)} criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.","",
    f"Maximum positive reward {pos}. Negative criteria total {neg}.","",
    f"- Format criteria: {fn} of {len(C)} ({fn/len(C):.0%}), under the half limit",
    f"- Format weight: {fw} of {pos} ({fw/pos:.1%}), under the quarter limit",
-   f"- Negative criteria: {sum(1 for k,x,_ in C if x<0)}, above the minimum of two",
-   f"- Longest criterion: {max(len(s) for _,_,s in C)} characters","","---",""]
-for i,(k,x,s) in enumerate(C,1):
-    L+=[f"### Criterion {i}  ·  weight `{x}`  ·  _{k}_","",s,"",f"<sub>{len(s)} / 500 characters</sub>",""]
+   f"- Negative criteria: {sum(1 for k,w,_ in C if w<0)}, above the minimum of two",
+   f"- Longest criterion: {max(len(t) for _,_,t in C)} characters","","---",""]
+for i,(k,w,t) in enumerate(C,1):
+    L+=[f"### Criterion {i}  ·  weight `{w}`  ·  _{k}_","",t,"",f"<sub>{len(t)} / 500 characters</sub>",""]
 open(OUT,"w").write("\n".join(L)+"\n")
-print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} ({fn/len(C):.0%}), {fw/pos:.1%} | longest {max(len(s) for _,_,s in C)} | over 500: {over or 'none'}")
+print(f"{len(C)} criteria | +{pos} / {neg} | format {fn} ({fn/len(C):.0%}), {fw/pos:.1%} | longest {max(len(t) for _,_,t in C)} | over 500: {over or 'none'}")

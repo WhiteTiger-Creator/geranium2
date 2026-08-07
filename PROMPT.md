@@ -2,16 +2,20 @@
 
 ---
 
-I run the analytics side of a mid-size research agency. Most of our work is continuous brand tracking for consumer clients, which means the same instrument every quarter and a client who reads the trend line before she reads anything else.
+I run delivery for a systems integration practice. Most of what we do is large ERP replacements for manufacturers, and the part clients underestimate every time is the order the sites go in.
 
-Halloway's wave 12 came out of field last week and their marketing director has already seen the topline. Awareness is down almost six points on the quarter and she has a board paper due on Friday. I do not believe the brand has moved. Field had a bad wave and I think what she is looking at is who answered rather than what they think, but that has to be established properly rather than asserted, and if I am wrong I would rather find out now.
+Verwood Specialty Chemicals is replacing its ERP across fourteen sites. The software is chosen, the build is done, and the first deployment team is free from the week commencing 7 September 2026. Marguerite Delahaye, who runs the programme, has had two goes at the sequence internally and her steering committee threw out both. The first ran the biggest sites first. The second spread them evenly across the calendar. She has written the whole thing up for us in Programme_Brief.docx, including why each attempt failed, and I would read that before anything else.
 
-Wave12_Data.csv is the delivered respondent file, uncleaned. Field_Report.docx sets out what happened during fieldwork. Read it before you touch the data, because three separate things went wrong and two of them change what the numbers mean. Method_Note.docx is our standing methodology for this tracker. It is not negotiable, because waves are comparable only if they are treated identically, and this is exactly the wave where someone will be tempted to depart from it in order to make the number look better. Benchmarks.xlsx has the population targets, and one figure in it that does not belong in a weighting scheme.
+Site_Profile.xlsx has the fourteen sites: how long each occupies a team, which master data domains each one owns or consumes, which two can only move during a plant shutdown, and which one is regulated. Vendor_Notice.docx is the letter from the incumbent software vendor. There is no extension available at any price, so the date in it is the date.
 
-Give me back Wave12_Weighted.xlsx. I want the cleaned respondent file with a weight against every retained row, the margins those weights hit, the weight diagnostics, and the wave 12 estimates restated so they sit properly on the trend. Put the weight on the row rather than only in the summary, because the client's own analyst will re-run this and I would like her to get the same answer.
+What I want is the sequence. Which site, in which wave, on which team, starting which programme week, with the calendar dates alongside so Marguerite can read it against her own diary. Show the team loading across the programme so the concurrency is visible, and show each constraint holding rather than telling me it holds. Her committee has rejected two plans already and will go looking for the week where it breaks.
 
-Tell me what the corrected figures are and what the precision honestly is after correcting a wave that closed two cells short. Do not present a number as more solid than it is.
+Tell me as well which sites carry the programme risk. Not all of them can absorb a slip, and I would rather know now which ones have nowhere to go.
+
+Name the file:
+
+Cutover_Plan.xlsx
 
 ---
 
-**Deliverable:** `Wave12_Weighted.xlsx`  |  **Inputs:** 4  |  **Multimodal:** No  |  **Web search:** No  |  **Time:** 8 hours  |  **Characters:** 1878 / 3000
+**Deliverable:** `Cutover_Plan.xlsx`  |  **Inputs:** 3  |  **Multimodal:** No  |  **Web search:** No  |  **Time:** 8 hours  |  **Characters:** 1710 / 3000
