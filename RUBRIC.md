@@ -1,13 +1,13 @@
 # Rubric - form-ready criteria
 
-**29 criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.
+**30 criteria.** Paste each string into its own Criterion field; the number goes in the Weight field only.
 
 Maximum positive reward 78. Negative criteria total -29.
 
-- Format criteria: 3 of 29 (10%), under the half limit
+- Format criteria: 3 of 30 (10%), under the half limit
 - Format weight: 5 of 78 (6.4%), under the quarter limit
 - Negative criteria: 7, above the minimum of two
-- Longest criterion: 377 characters
+- Longest criterion: 344 characters
 
 ---
 
@@ -37,9 +37,9 @@ Starts Sarnia in programme week 24 and Mobile in programme week 33, being their 
 
 ### Criterion 5  ·  weight `5`  ·  _Rigid_
 
-Places no cutover in a financial blackout week and allows none to run through one. The blackout weeks are 3, 4, 16, 17, 18, 19, 20, 29, 30, 42, 43. A plan in which any site's cutover spans a blackout week earns nothing.
+Places no cutover in a financial blackout week and allows none to run through one. A blackout is the week containing a quarter end and the week before it, and the first three weeks of January; on the programme calendar those are weeks 3, 4, 16, 17, 18, 19, 20, 29, 30, 42, 43. A plan in which any site's cutover spans one of them earns nothing.
 
-<sub>219 / 500 characters</sub>
+<sub>344 / 500 characters</sub>
 
 ### Criterion 6  ·  weight `5`  ·  _Rigid_
 
@@ -67,9 +67,9 @@ Uses the cutover durations given in the site profile without altering them, so t
 
 ### Criterion 10  ·  weight `3`  ·  _Rigid_
 
-Reports the last go-live as about programme week 38 and the float to the support deadline as about 5 weeks. Presenting a plan without stating how much room is left earns nothing.
+States the programme week of the last go-live and the float remaining to the support deadline, with both figures consistent with the schedule presented. On a plan that satisfies every constraint the last go-live falls at or before programme week 43. A plan that does not say how much room is left earns nothing.
 
-<sub>178 / 500 characters</sub>
+<sub>311 / 500 characters</sub>
 
 ### Criterion 11  ·  weight `3`  ·  _Rigid_
 
@@ -95,91 +95,97 @@ Treats validation at Cork as not occupying a deployment team, so the team is rel
 
 <sub>194 / 500 characters</sub>
 
-### Criterion 15  ·  weight `5`  ·  _Subjective_
+### Criterion 15  ·  weight `3`  ·  _Subjective_
 
-Explains the sequence as driven by freedom of movement rather than by site size or importance, identifying the master data owners, the two shutdown windows and the regulated site as the fixed points and fitting the remaining sites around them. Any explanation that identifies those constraints as governing earns full credit; a plan presented without a rationale earns nothing.
+Explains the sequence as driven by which sites have the least freedom to move rather than by site size, user count or business importance. Any rationale that makes constraint severity the ordering principle earns full credit; a plan presented without a stated rationale earns nothing.
 
-<sub>377 / 500 characters</sub>
+<sub>284 / 500 characters</sub>
 
-### Criterion 16  ·  weight `4`  ·  _Subjective_
+### Criterion 16  ·  weight `2`  ·  _Subjective_
+
+Identifies the fixed points the rest of the plan is built around: the master data owners, the two sites limited to a shutdown window, and the regulated site. Naming all three categories earns full credit; naming only some of them earns nothing.
+
+<sub>244 / 500 characters</sub>
+
+### Criterion 17  ·  weight `4`  ·  _Subjective_
 
 Identifies which sites carry programme risk and why, recognising that a slip on Bridgnorth moves the eleven sites that depend on it and that a slip causing Sarnia or Mobile to miss its shutdown window moves that site by a full year. Any risk treatment that distinguishes the sites with no recovery from those with float earns full credit.
 
 <sub>338 / 500 characters</sub>
 
-### Criterion 17  ·  weight `3`  ·  _Subjective_
+### Criterion 18  ·  weight `3`  ·  _Subjective_
 
 Addresses the two failed internal attempts described in the brief, showing why a size-ordered sequence and an evenly spread sequence each break. Any explanation that names the specific constraint each approach violates earns full credit.
 
 <sub>237 / 500 characters</sub>
 
-### Criterion 18  ·  weight `3`  ·  _Subjective_
+### Criterion 19  ·  weight `3`  ·  _Subjective_
 
 Shows each constraint as satisfied by the plan rather than stating that it has been met, so the steering committee can verify the plan rather than trust it. Any presentation that tests the constraints against the schedule itself earns full credit.
 
 <sub>247 / 500 characters</sub>
 
-### Criterion 19  ·  weight `3`  ·  _Subjective_
+### Criterion 20  ·  weight `3`  ·  _Subjective_
 
 Locates where the float sits in the programme and observes which sites it does and does not protect, noting that float at the end of the programme does not help the shutdown sites or the regulated site. Any treatment that connects the float to specific sites earns full credit.
 
 <sub>277 / 500 characters</sub>
 
-### Criterion 20  ·  weight `2`  ·  _Format_
+### Criterion 21  ·  weight `2`  ·  _Format_
 
 Delivers a single file named Cutover_Plan.xlsx, with that exact name and extension. Any other filename or extension, or a deliverable supplied as chat text rather than a file, earns nothing.
 
 <sub>190 / 500 characters</sub>
 
-### Criterion 21  ·  weight `2`  ·  _Format_
+### Criterion 22  ·  weight `2`  ·  _Format_
 
 Presents the plan as a schedule that can be read directly, with one row per site carrying wave, team, start week and calendar date, rather than as narrative describing what the sequence should be. A prose description without a schedule earns nothing.
 
 <sub>250 / 500 characters</sub>
 
-### Criterion 22  ·  weight `1`  ·  _Format_
+### Criterion 23  ·  weight `1`  ·  _Format_
 
 Shows team loading across the programme weeks so that concurrency and the blackout periods are visible. A plan without a time-phased view earns nothing.
 
 <sub>152 / 500 characters</sub>
 
-### Criterion 23  ·  weight `-5`  ·  _Negative_
+### Criterion 24  ·  weight `-5`  ·  _Negative_
 
 Produces a plan in which any site begins its cutover before a site it depends on for master data has completed. Apply once.
 
 <sub>123 / 500 characters</sub>
 
-### Criterion 24  ·  weight `-5`  ·  _Negative_
+### Criterion 25  ·  weight `-5`  ·  _Negative_
 
 Produces a plan in which more than three sites are in cutover in any programme week. Apply once.
 
 <sub>96 / 500 characters</sub>
 
-### Criterion 25  ·  weight `-5`  ·  _Negative_
+### Criterion 26  ·  weight `-5`  ·  _Negative_
 
 Starts Sarnia or Mobile outside its stated shutdown window. Apply once for either.
 
 <sub>82 / 500 characters</sub>
 
-### Criterion 26  ·  weight `-4`  ·  _Negative_
+### Criterion 27  ·  weight `-4`  ·  _Negative_
 
 Places Cork in the final waves, so that its validation period runs past the end of legacy support. Apply once.
 
 <sub>110 / 500 characters</sub>
 
-### Criterion 27  ·  weight `-4`  ·  _Negative_
+### Criterion 28  ·  weight `-4`  ·  _Negative_
 
-Schedules any cutover to start in or run through a financial blackout week. Apply once.
+Schedules any cutover to start in or run through a financial blackout week, being a week containing a quarter end, the week immediately before one, or one of the first three weeks of January. Apply once.
 
-<sub>87 / 500 characters</sub>
+<sub>203 / 500 characters</sub>
 
-### Criterion 28  ·  weight `-3`  ·  _Negative_
+### Criterion 29  ·  weight `-3`  ·  _Negative_
 
 Treats Cork as live at the end of its technical cutover rather than at the end of validation, understating the date by which it must start. Apply once.
 
 <sub>151 / 500 characters</sub>
 
-### Criterion 29  ·  weight `-3`  ·  _Negative_
+### Criterion 30  ·  weight `-3`  ·  _Negative_
 
 Alters a cutover duration, adds a fourth deployment team, or moves a shutdown window in order to make the plan fit, when the brief states that none of these is available. Apply once.
 

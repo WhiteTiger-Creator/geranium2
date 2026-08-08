@@ -80,6 +80,33 @@ head(d,"The date that matters")
 d.add_paragraph("Every site must be live on the new system before the legacy vendor's support ends. "
                 "The vendor's notice is attached. Live means transacting, which for Cork means after "
                 "validation and not after the technical cutover.")
+head(d,"Governance and why the last two attempts were rejected")
+d.add_paragraph(
+    "The steering committee is chaired by our chief operating officer and includes the group "
+    "financial controller, the head of manufacturing and the two divisional managing directors. It "
+    "meets monthly. The first plan I put to it ran the sites in descending order of user count on the "
+    "reasoning that the largest sites carry the most benefit and should realise it soonest. The "
+    "committee did not reject that on principle; the head of manufacturing rejected it because the "
+    "second site in the sequence could not have transacted at all, and once that was pointed out the "
+    "rest of the ordering lost its authority. The second plan spread the fourteen sites evenly across "
+    "the available months, which looked orderly on a page and put four cutovers into weeks the "
+    "finance function had already told me were unavailable. The controller counted them in the "
+    "meeting. I would rather not present a third plan that fails on something anyone in the room can "
+    "check in ninety seconds.")
+head(d,"Deployment teams")
+d.add_paragraph(
+    "Each deployment team is nine people: a lead, two functional consultants, a data lead, two "
+    "technical consultants, a training lead and two floaters. The teams are contracted for the "
+    "duration of the programme and the composition does not change, which is why a team cannot be "
+    "split across two sites or lent out during a gap. If a team is idle it is idle and we are still "
+    "paying for it, so I would like the plan to keep them working, but not at the cost of breaking a "
+    "constraint.")
+head(d,"Why the durations are fixed")
+d.add_paragraph(
+    "The cutover durations in the site profile came out of the pilot at Bridgnorth and a bottom-up "
+    "estimate for the rest, and finance has approved the resourcing against them. They are not "
+    "padded and they are not a starting position for a negotiation. If the plan only works by "
+    "shortening one of them, the plan does not work.")
 head(d,"What I want back")
 d.add_paragraph("The sequence: which site, in which wave, on which team, starting which programme week. "
                 "I want to be able to see the team loading week by week, and I want each constraint "
@@ -127,5 +154,25 @@ d.add_paragraph("The perpetual licence survives the end of support. The customer
                 "operate the software unsupported at its own risk. Verwood should note that the "
                 "product will no longer receive statutory or fiscal updates, which in most "
                 "jurisdictions makes continued use impracticable for a trading entity.")
+head(d,"Scope of the withdrawal")
+d.add_paragraph(
+    "For the avoidance of doubt, the withdrawal covers the application, the database layer supplied "
+    "with it, the reporting module and all interface adaptors licensed under the same agreement. It "
+    "covers corrective maintenance, defect correction, statutory and fiscal updates, security "
+    "patching, the customer support desk, the online knowledge base and the annual health check "
+    "visit. Calderstone will not issue a final maintenance release and there is no arrangement under "
+    "which a defect identified before the withdrawal date will be corrected after it.")
+head(d,"Assistance with transition")
+d.add_paragraph(
+    "Calderstone will, on request received not later than sixty days before the withdrawal date, "
+    "provide a single extract of the customer's data in the delimited format described in schedule 4 "
+    "of the support agreement, at the rates then in force. Calderstone will not provide "
+    "reconciliation of that extract, mapping to any successor system, or consultancy in connection "
+    "with a migration. Requests received after that date will not be accepted.")
+head(d,"Contact")
+d.add_paragraph(
+    "Correspondence in connection with this notice should be addressed to the account director, "
+    "Calderstone Business Systems Limited, quoting the reference above. Calderstone will not respond "
+    "to correspondence seeking to vary the withdrawal date.")
 d.save(f"{OUT}/Vendor_Notice.docx")
 print("\n".join(sorted(os.listdir(OUT))))
